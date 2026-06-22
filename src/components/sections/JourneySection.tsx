@@ -39,7 +39,7 @@ export function JourneySection({ content }: JourneySectionProps) {
     <section id="journey" className="page-section" aria-labelledby="journey-title">
       <div className="mx-auto w-full max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-violet-700 dark:text-violet-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-700 dark:text-amber-300">
             {content.eyebrow}
           </p>
           <h2

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { X } from 'lucide-react'
 import { Galleria } from 'primereact/galleria'
 
 export type HobbyImage = {
@@ -15,6 +16,8 @@ export type HobbyItem = {
 export type HobbiesContent = {
   title: string
   eyebrow: string
+  openGalleryLabel: string
+  closeGalleryLabel: string
   items: HobbyItem[]
 }
 
@@ -22,8 +25,22 @@ type HobbiesSectionProps = {
   content: HobbiesContent
 }
 
+const galleriaResponsiveOptions = [
+  {
+    breakpoint: '1024px',
+    numVisible: 5,
+  },
+  {
+    breakpoint: '768px',
+    numVisible: 3,
+  },
+  {
+    breakpoint: '560px',
+    numVisible: 2,
+  },
+]
+
 export function HobbiesSection({ content }: HobbiesSectionProps) {
-  const galleriaRef = useRef<Galleria>(null)
   const [activeHobbyIndex, setActiveHobbyIndex] = useState<number | null>(null)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const activeHobby = activeHobbyIndex === null ? null : content.items[activeHobbyIndex]
@@ -32,12 +49,6 @@ export function HobbiesSection({ content }: HobbiesSectionProps) {
     setActiveHobbyIndex(index)
     setActiveImageIndex(0)
   }
-
-  useEffect(() => {
-    if (activeHobbyIndex !== null) {
-      galleriaRef.current?.show()
-    }
-  }, [activeHobbyIndex])
 
   const imageTemplate = (image: HobbyImage) => (
     <img className="hobby-gallery-image" src={image.src} alt={image.alt} />
@@ -51,7 +62,7 @@ export function HobbiesSection({ content }: HobbiesSectionProps) {
     <section id="hobbies" className="page-section" aria-labelledby="hobbies-title">
       <div className="mx-auto w-full max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-violet-700 dark:text-violet-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-700 dark:text-amber-300">
             {content.eyebrow}
           </p>
           <h2
@@ -69,7 +80,7 @@ export function HobbiesSection({ content }: HobbiesSectionProps) {
                 type="button"
                 className="hobby-photo-stack"
                 onClick={() => openGallery(hobbyIndex)}
-                aria-label={`Abrir galeria: ${hobby.title}`}
+                aria-label={`${content.openGalleryLabel}: ${hobby.title}`}
               >
                 {hobby.images.map((image, index) => (
                   <img
@@ -95,19 +106,42 @@ export function HobbiesSection({ content }: HobbiesSectionProps) {
         </div>
       </div>
 
-      <Galleria
-        ref={galleriaRef}
-        value={activeHobby?.images ?? []}
-        activeIndex={activeImageIndex}
-        onItemChange={(event) => setActiveImageIndex(event.index)}
-        onHide={() => setActiveHobbyIndex(null)}
-        fullScreen
-        circular
-        showItemNavigators
-        showThumbnails
-        item={imageTemplate}
-        thumbnail={thumbnailTemplate}
-      />
+      {activeHobby ? (
+        <div
+          className="hobby-gallery-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeHobby.title}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setActiveHobbyIndex(null)
+            }
+          }}
+        >
+          <div className="hobby-gallery-panel">
+            <button
+              type="button"
+              className="hobby-gallery-close"
+              onClick={() => setActiveHobbyIndex(null)}
+              aria-label={content.closeGalleryLabel}
+            >
+              <X className="size-5" aria-hidden="true" />
+            </button>
+            <Galleria
+              value={activeHobby.images}
+              activeIndex={activeImageIndex}
+              onItemChange={(event) => setActiveImageIndex(event.index)}
+              responsiveOptions={galleriaResponsiveOptions}
+              numVisible={5}
+              circular
+              showItemNavigators
+              item={imageTemplate}
+              thumbnail={thumbnailTemplate}
+              style={{ maxWidth: '760px' }}
+            />
+          </div>
+        </div>
+      ) : null}
     </section>
   )
 }

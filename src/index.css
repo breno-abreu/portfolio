@@ -45,7 +45,7 @@ a:focus-visible {
 }
 
 .skip-link {
-  @apply fixed left-4 top-4 z-50 -translate-y-20 rounded-full bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-transform duration-200 focus:translate-y-0;
+  @apply fixed left-4 top-4 z-50 -translate-y-20 rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white transition-transform duration-200 focus:translate-y-0;
 }
 
 .site-navbar {
@@ -66,7 +66,7 @@ a:focus-visible {
 }
 
 .brand-link {
-  @apply shrink-0 text-sm font-semibold uppercase tracking-[0.22em] text-neutral-950 transition-colors hover:text-violet-700 dark:text-neutral-50 dark:hover:text-violet-200;
+  @apply shrink-0 text-sm font-semibold uppercase tracking-[0.22em] text-neutral-950 transition-colors hover:text-amber-700 dark:text-neutral-50 dark:hover:text-amber-200;
 }
 
 .nav-list {
@@ -78,7 +78,16 @@ a:focus-visible {
 }
 
 .nav-link {
-  @apply rounded-full px-3 py-2 text-sm font-medium text-neutral-600 transition duration-200 hover:bg-neutral-200/70 hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-neutral-800/80 dark:hover:text-neutral-50;
+  @apply relative rounded-full px-3 py-2 text-sm font-medium text-neutral-600 transition duration-300 hover:bg-neutral-200/70 hover:text-neutral-950 data-[active=true]:text-amber-800 dark:text-neutral-300 dark:hover:bg-neutral-800/80 dark:hover:text-neutral-50 dark:data-[active=true]:text-amber-200;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-1 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-amber-700 opacity-0 transition-all duration-300 ease-out dark:bg-amber-300;
+}
+
+.nav-link[data-active='true']::after {
+  @apply w-6 opacity-100;
 }
 
 .navbar-actions {
@@ -90,11 +99,11 @@ a:focus-visible {
 }
 
 .language-button {
-  @apply inline-flex h-8 w-10 items-center justify-center rounded-full opacity-55 transition duration-200 hover:opacity-100 focus-visible:opacity-100 data-[active=true]:bg-violet-100 data-[active=true]:opacity-100 data-[active=true]:shadow-sm data-[active=true]:ring-1 data-[active=true]:ring-violet-300 dark:data-[active=true]:bg-violet-500/20 dark:data-[active=true]:ring-violet-300/50;
+  @apply inline-flex h-8 w-10 items-center justify-center rounded-full opacity-55 transition duration-200 hover:opacity-100 focus-visible:opacity-100 data-[active=true]:bg-amber-100 data-[active=true]:opacity-100 data-[active=true]:shadow-sm data-[active=true]:ring-1 data-[active=true]:ring-amber-300 dark:data-[active=true]:bg-amber-500/20 dark:data-[active=true]:ring-amber-300/50;
 }
 
 .control-button {
-  @apply inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white/80 px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-violet-400 hover:text-violet-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-100 dark:hover:border-violet-300 dark:hover:text-violet-200;
+  @apply inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white/80 px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-amber-400 hover:text-amber-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-100 dark:hover:border-amber-300 dark:hover:text-amber-200;
 }
 
 .language-flag {
@@ -122,15 +131,15 @@ a:focus-visible {
 }
 
 .hero-button-primary {
-  @apply bg-neutral-950 text-white hover:bg-violet-700 dark:bg-white dark:text-neutral-950 dark:hover:bg-violet-100;
+  @apply bg-neutral-950 text-white hover:bg-amber-700 dark:bg-white dark:text-neutral-950 dark:hover:bg-amber-100;
 }
 
 .hero-button-secondary {
-  @apply border border-neutral-300 bg-white/80 text-neutral-800 backdrop-blur hover:border-violet-400 hover:text-violet-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-100 dark:hover:border-violet-300 dark:hover:text-violet-200;
+  @apply border border-neutral-300 bg-white/80 text-neutral-800 backdrop-blur hover:border-amber-400 hover:text-amber-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-100 dark:hover:border-amber-300 dark:hover:text-amber-200;
 }
 
 .email-copy-button {
-  @apply inline-flex size-8 items-center justify-center rounded-full border border-neutral-300 bg-white/80 text-neutral-600 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-violet-400 hover:text-violet-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-300 dark:hover:border-violet-300 dark:hover:text-violet-200;
+  @apply inline-flex size-8 items-center justify-center rounded-full border border-neutral-300 bg-white/80 text-neutral-600 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-amber-400 hover:text-amber-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-300 dark:hover:border-amber-300 dark:hover:text-amber-200;
 }
 
 .journey-prime-timeline {
@@ -167,7 +176,7 @@ a:focus-visible {
 }
 
 .journey-prime-timeline .p-timeline-event-connector {
-  @apply w-px flex-1 bg-violet-200 dark:bg-violet-400/30;
+  @apply w-px flex-1 bg-amber-200 dark:bg-amber-400/30;
 }
 
 .journey-prime-timeline .p-timeline-event:first-child .p-timeline-event-connector:first-child,
@@ -176,11 +185,11 @@ a:focus-visible {
 }
 
 .journey-marker {
-  @apply relative z-10 block size-4 rounded-full border-4 border-[#fbf7ef] bg-violet-600 shadow-sm dark:border-neutral-950 dark:bg-violet-300;
+  @apply relative z-10 block size-4 rounded-full border-4 border-[#fbf7ef] bg-amber-600 shadow-sm dark:border-neutral-950 dark:bg-amber-300;
 }
 
 .journey-date {
-  @apply inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-violet-700 dark:bg-violet-400/10 dark:text-violet-300;
+  @apply inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-amber-700 dark:bg-amber-400/10 dark:text-amber-300;
 }
 
 .journey-card {
@@ -234,30 +243,30 @@ a:focus-visible {
 }
 
 .project-tech {
-  @apply rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-sm font-medium text-violet-700 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200;
+  @apply rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-sm font-medium text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200;
 }
 
 .skill-card {
-  @apply rounded-[1.5rem] border border-neutral-200 bg-white/60 p-5 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-1 hover:border-violet-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/55 dark:hover:border-violet-400/30;
+  @apply rounded-[1.5rem] border border-neutral-200 bg-white/60 p-5 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-1 hover:border-amber-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/55 dark:hover:border-amber-400/30;
 }
 
 .skill-icon {
-  @apply inline-flex size-12 items-center justify-center rounded-2xl bg-violet-100 text-2xl text-violet-700 dark:bg-violet-400/10 dark:text-violet-300;
+  @apply inline-flex size-12 items-center justify-center rounded-2xl bg-amber-100 text-2xl text-amber-700 dark:bg-amber-400/10 dark:text-amber-300;
 }
 
 .skill-brand-icon {
   @apply max-h-7 max-w-9 object-contain;
-  filter: brightness(0) saturate(100%) invert(26%) sepia(97%) saturate(2500%)
-    hue-rotate(255deg) brightness(88%) contrast(102%);
+  filter: brightness(0) saturate(100%) invert(35%) sepia(80%) saturate(1450%)
+    hue-rotate(12deg) brightness(92%) contrast(96%);
 }
 
 .dark .skill-brand-icon {
-  filter: brightness(0) saturate(100%) invert(78%) sepia(50%) saturate(690%)
-    hue-rotate(212deg) brightness(101%) contrast(98%);
+  filter: brightness(0) saturate(100%) invert(88%) sepia(61%) saturate(910%)
+    hue-rotate(335deg) brightness(101%) contrast(97%);
 }
 
 .hobby-card {
-  @apply rounded-[2rem] border border-neutral-200 bg-white/60 p-5 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-violet-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/55 dark:hover:border-violet-400/30;
+  @apply rounded-[2rem] border border-neutral-200 bg-white/60 p-5 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-amber-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/55 dark:hover:border-amber-400/30;
 }
 
 .hobby-photo-stack {
@@ -296,20 +305,66 @@ a:focus-visible {
 }
 
 .hobby-gallery-image {
-  @apply max-h-[78dvh] max-w-[92vw] rounded-[1.5rem] object-contain shadow-2xl shadow-black/40;
+  @apply h-auto max-h-[62dvh] w-full rounded-[1.25rem] object-contain;
 }
 
 .hobby-gallery-thumbnail {
   @apply h-16 w-24 rounded-lg object-cover;
 }
 
-.p-galleria-mask {
-  @apply bg-black/85 backdrop-blur-sm;
+.hobby-gallery-overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm;
 }
 
-.p-galleria .p-galleria-thumbnail-container,
-.p-galleria .p-galleria-item-nav {
+.hobby-gallery-panel {
+  @apply relative rounded-[2rem] border border-white/10 bg-neutral-950/95 p-4 shadow-2xl shadow-black/50;
+}
+
+.hobby-gallery-close {
+  @apply absolute -right-4 -top-4 z-10 inline-flex size-12 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white text-neutral-950 shadow-xl shadow-black/30 transition duration-300 hover:-translate-y-0.5 hover:scale-110 hover:bg-amber-100 hover:text-amber-800 focus-visible:-translate-y-0.5 focus-visible:scale-110 focus-visible:bg-amber-100 focus-visible:text-amber-800 active:scale-95;
+}
+
+.hobby-gallery-panel .p-galleria,
+.hobby-gallery-panel .p-galleria-content,
+.hobby-gallery-panel .p-galleria-item-wrapper,
+.hobby-gallery-panel .p-galleria-item-container {
   @apply bg-transparent;
+}
+
+.hobby-gallery-panel .p-galleria-thumbnail-container {
+  @apply mt-3 rounded-2xl bg-black/60 p-3;
+}
+
+.hobby-gallery-panel .p-galleria-thumbnail-item {
+  @apply opacity-60 transition duration-200;
+}
+
+.hobby-gallery-panel .p-galleria-thumbnail-item-current {
+  @apply opacity-100;
+}
+
+.hobby-gallery-panel .p-galleria-item-nav {
+  @apply mx-4 inline-flex size-14 items-center justify-center rounded-full border border-white/15 bg-white/15 text-white shadow-lg shadow-black/20 backdrop-blur-md transition duration-300 hover:scale-110 hover:border-amber-200/60 hover:bg-amber-600/80 hover:shadow-amber-950/30 active:scale-95;
+}
+
+.hobby-gallery-panel .p-galleria-item-prev:hover {
+  @apply -translate-x-1;
+}
+
+.hobby-gallery-panel .p-galleria-item-next:hover {
+  @apply translate-x-1;
+}
+
+.hobby-gallery-panel .p-galleria-item-nav svg {
+  @apply size-6;
+}
+
+.value-card {
+  @apply rounded-[2rem] border border-neutral-200 bg-white/60 p-6 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-amber-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/55 dark:hover:border-amber-400/30 sm:p-8;
+}
+
+.contact-card {
+  @apply rounded-[2rem] border border-neutral-200 bg-white/65 p-6 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/60 sm:p-8 lg:p-10;
 }
 
 @media (prefers-reduced-motion: reduce) {

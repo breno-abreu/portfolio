@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar'
 import { AboutSection } from './components/sections/AboutSection'
 import type { AboutContent } from './components/sections/AboutSection'
 import { ContactSection } from './components/sections/ContactSection'
+import type { ContactContent } from './components/sections/ContactSection'
 import { HobbiesSection } from './components/sections/HobbiesSection'
 import type { HobbiesContent } from './components/sections/HobbiesSection'
 import { HomeSection } from './components/sections/HomeSection'
@@ -14,6 +15,7 @@ import type { ProjectContent } from './components/sections/ProjectSection'
 import { SkillsSection } from './components/sections/SkillsSection'
 import type { SkillsContent } from './components/sections/SkillsSection'
 import { ValuesSection } from './components/sections/ValuesSection'
+import type { ValuesContent } from './components/sections/ValuesSection'
 
 export type Language = 'pt' | 'en'
 export type Theme = 'light' | 'dark'
@@ -453,6 +455,8 @@ const hobbiesContent = {
   pt: {
     title: 'Hobbies',
     eyebrow: 'Além do código',
+    openGalleryLabel: 'Abrir galeria',
+    closeGalleryLabel: 'Fechar galeria',
     items: [
       {
         title: 'Música e Piano',
@@ -516,6 +520,8 @@ const hobbiesContent = {
   en: {
     title: 'Hobbies',
     eyebrow: 'Beyond code',
+    openGalleryLabel: 'Open gallery',
+    closeGalleryLabel: 'Close gallery',
     items: [
       {
         title: 'Music and Piano',
@@ -578,6 +584,70 @@ const hobbiesContent = {
   },
 } satisfies Record<Language, HobbiesContent>
 
+const valuesContent = {
+  pt: {
+    title: 'Valores Profissionais e Futuro',
+    eyebrow: 'Direção',
+    items: [
+      {
+        title: 'Valores profissionais',
+        description:
+          'Meus valores profissionais estão em criar aplicações que resolvam problemas reais, melhorem a qualidade de vida e de trabalho dos usuários, aumentem a velocidade e a facilidade na execução de processos e sejam construídas com criatividade e atenção especial à experiência do usuário. Para mim, uma boa solução precisa ser útil, simples de usar, confiável e alinhada ao contexto de quem realmente vai utilizá-la.',
+      },
+      {
+        title: 'Planos para o futuro',
+        description:
+          'Para o futuro, tenho interesse em aprofundar minha formação com especializações em UX Engineering e Engenharia de Software. Também quero me desenvolver cada vez mais na área de Inteligência Artificial, especialmente em como aplicar IA de forma prática, responsável e integrada às aplicações que desenvolvo.',
+      },
+    ],
+  },
+  en: {
+    title: 'Professional Values and Future',
+    eyebrow: 'Direction',
+    items: [
+      {
+        title: 'Professional values',
+        description:
+          'My professional values are centered on building applications that solve real problems, improve users’ quality of life and work, make processes faster and easier to execute, and are created with creativity and strong attention to user experience. For me, a good solution needs to be useful, simple to use, reliable, and aligned with the context of the people who will actually use it.',
+      },
+      {
+        title: 'Future plans',
+        description:
+          'For the future, I am interested in deepening my education through specializations in UX Engineering and Software Engineering. I also want to keep growing in the area of Artificial Intelligence, especially in how to apply AI in practical, responsible ways integrated into the applications I build.',
+      },
+    ],
+  },
+} satisfies Record<Language, ValuesContent>
+
+const contactContent = {
+  pt: {
+    title: 'Contato',
+    eyebrow: 'Vamos conversar',
+    description:
+      'Se quiser trocar uma ideia, conhecer melhor meu trabalho ou falar sobre oportunidades, estes são os melhores canais para entrar em contato comigo.',
+    githubLabel: 'GitHub',
+    linkedinLabel: 'LinkedIn',
+    emailLabel: 'Email',
+    copyEmailLabel: 'Copiar email',
+    copiedEmailLabel: 'Email copiado',
+    resumeLabel: 'Currículo',
+    resumeUnavailableLabel: 'Currículo ainda indisponível',
+  },
+  en: {
+    title: 'Contact',
+    eyebrow: "Let's talk",
+    description:
+      'If you want to connect, learn more about my work, or talk about opportunities, these are the best channels to reach me.',
+    githubLabel: 'GitHub',
+    linkedinLabel: 'LinkedIn',
+    emailLabel: 'Email',
+    copyEmailLabel: 'Copy email',
+    copiedEmailLabel: 'Email copied',
+    resumeLabel: 'Resume',
+    resumeUnavailableLabel: 'Resume is not available yet',
+  },
+} satisfies Record<Language, ContactContent>
+
 function getStoredLanguage(): Language {
   return localStorage.getItem(LANGUAGE_STORAGE_KEY) === 'en' ? 'en' : 'pt'
 }
@@ -589,6 +659,7 @@ function getStoredTheme(): Theme {
 function App() {
   const [language, setLanguage] = useState<Language>(getStoredLanguage)
   const [theme, setTheme] = useState<Theme>(getStoredTheme)
+  const [activeSection, setActiveSection] = useState('home')
   const text = copy[language]
   const aboutContent = getAboutContent(getExperienceYears())
 
@@ -603,6 +674,33 @@ function App() {
     localStorage.setItem(THEME_STORAGE_KEY, theme)
   }, [theme])
 
+  useEffect(() => {
+    const sectionIds = navItems[language].map((item) => item.href.replace('#', ''))
+    const sections = sectionIds
+      .map((sectionId) => document.getElementById(sectionId))
+      .filter((section): section is HTMLElement => Boolean(section))
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSection = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0]
+
+        if (visibleSection) {
+          setActiveSection(visibleSection.target.id)
+        }
+      },
+      {
+        rootMargin: '-35% 0px -45% 0px',
+        threshold: [0.1, 0.25, 0.5, 0.75],
+      },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [language])
+
   return (
     <div className="min-h-dvh bg-[#fbf7ef] text-neutral-950 transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-50">
       <a className="skip-link" href="#main-content">
@@ -613,18 +711,19 @@ function App() {
         theme={theme}
         text={text}
         navItems={navItems[language]}
+        activeSection={activeSection}
         onLanguageChange={setLanguage}
         onThemeChange={setTheme}
       />
-      <main id="main-content">
+      <main id="main-content" className="pb-56">
         <HomeSection content={homeContent[language]} />
         <AboutSection content={aboutContent[language]} />
         <JourneySection content={journeyContent[language]} />
         <ProjectSection content={projectContent[language]} />
         <SkillsSection content={skillsContent[language]} />
         <HobbiesSection content={hobbiesContent[language]} />
-        <ValuesSection />
-        <ContactSection />
+        <ValuesSection content={valuesContent[language]} />
+        <ContactSection content={contactContent[language]} />
       </main>
     </div>
   )

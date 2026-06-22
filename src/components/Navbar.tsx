@@ -11,6 +11,7 @@ type NavbarProps = {
   theme: Theme
   text: Record<string, string>
   navItems: NavItem[]
+  activeSection: string
   onLanguageChange: (language: Language) => void
   onThemeChange: (theme: Theme) => void
 }
@@ -20,6 +21,7 @@ export function Navbar({
   theme,
   text,
   navItems,
+  activeSection,
   onLanguageChange,
   onThemeChange,
 }: NavbarProps) {
@@ -41,13 +43,22 @@ export function Navbar({
 
           <nav className="min-w-0 flex-1" aria-label="Navegacao principal">
             <ul className="nav-list">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <a className="nav-link" href={item.href}>
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const isActive = item.href === `#${activeSection}`
+
+                return (
+                  <li key={item.href}>
+                    <a
+                      className="nav-link"
+                      href={item.href}
+                      data-active={isActive}
+                      aria-current={isActive ? 'true' : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </nav>
         </div>

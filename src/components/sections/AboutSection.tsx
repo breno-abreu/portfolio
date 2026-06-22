@@ -21,7 +21,7 @@ export function AboutSection({ content }: AboutSectionProps) {
     <section id="about" className="page-section" aria-labelledby="about-title">
       <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[0.42fr_1fr]">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-violet-700 dark:text-violet-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-700 dark:text-amber-300">
             {content.eyebrow}
           </p>
           <h2 id="about-title" className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -41,7 +41,7 @@ export function AboutSection({ content }: AboutSectionProps) {
                 <>
                   {paragraph.before}
                   <a
-                    className="font-medium text-violet-700 underline decoration-violet-300 underline-offset-4 transition-colors hover:text-violet-900 dark:text-violet-300 dark:decoration-violet-500 dark:hover:text-violet-100"
+                    className="font-medium text-amber-700 underline decoration-amber-300 underline-offset-4 transition-colors hover:text-amber-900 dark:text-amber-300 dark:decoration-amber-500 dark:hover:text-amber-100"
                     href={paragraph.href}
                     download
                     aria-label={paragraph.downloadLabel}

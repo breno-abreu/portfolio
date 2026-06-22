@@ -4,6 +4,8 @@ export type JourneyItem = {
   period: string
   title: string
   description: string
+  logoSrc: string
+  logoAlt: string
 }
 
 export type JourneyContent = {
@@ -26,9 +28,14 @@ export function JourneySection({ content }: JourneySectionProps) {
   const contentTemplate = (item: JourneyItem) => (
     <article className="journey-card">
       <span className="journey-date journey-date-mobile">{item.period}</span>
-      <h3 className="text-xl font-semibold text-neutral-950 dark:text-neutral-50">
-        {item.title}
-      </h3>
+      <div className="journey-card-header">
+        <span className="journey-logo-wrap">
+          <img src={item.logoSrc} alt={item.logoAlt} className="journey-logo" />
+        </span>
+        <h3 className="text-xl font-semibold text-neutral-950 dark:text-neutral-50">
+          {item.title}
+        </h3>
+      </div>
       <p className="mt-3 leading-7 text-neutral-700 dark:text-neutral-300">
         {item.description}
       </p>

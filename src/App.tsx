@@ -162,29 +162,39 @@ const journeyContent = {
         period: 'Janeiro 2018',
         title: 'Ingresso na UTFPR',
         description: 'Ingressei no curso de Bacharelado em Sistemas de Informação na UTFPR.',
+        logoSrc: '/company-logos/utfpr.png',
+        logoAlt: 'Logo da UTFPR',
       },
       {
         period: 'Dezembro 2020 - Fevereiro 2021',
         title: 'Banco de dados para a APRE',
         description: 'Desenvolvi um banco de dados para a APRE.',
+        logoSrc: '/company-logos/apre.png',
+        logoAlt: 'Logo da APRE',
       },
       {
         period: 'Dezembro 2021',
         title: 'Estágio na Rhodia Brasil',
         description:
           'Comecei a trabalhar como estagiário na Rhodia Brasil (Grupo Solvay), atuando como desenvolvedor de RPAs.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Logo da Solvay',
       },
       {
         period: 'Julho 2023',
         title: 'Process Mining e Engenharia de Dados',
         description:
           'Ainda na Rhodia Brasil e como estagiário, comecei a trabalhar na equipe de Process Mining como engenheiro de dados utilizando a plataforma Celonis EMS.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Logo da Solvay',
       },
       {
         period: 'Setembro 2024 - Hoje',
         title: 'Desenvolvedor Fullstack na Govtech',
         description:
           'Trabalho como desenvolvedor Fullstack na Govtech (Grupo Negócios Públicos).',
+        logoSrc: '/company-logos/grupo-negocios-publicos.png',
+        logoAlt: 'Logo do Grupo Negócios Públicos',
       },
     ],
   },
@@ -197,29 +207,39 @@ const journeyContent = {
         title: 'Started at UTFPR',
         description:
           "I started the Bachelor's degree in Information Systems at UTFPR.",
+        logoSrc: '/company-logos/utfpr.png',
+        logoAlt: 'UTFPR logo',
       },
       {
         period: 'December 2020 - February 2021',
         title: 'Database for APRE',
         description: 'I developed a database for APRE.',
+        logoSrc: '/company-logos/apre.png',
+        logoAlt: 'APRE logo',
       },
       {
         period: 'December 2021',
         title: 'Internship at Rhodia Brazil',
         description:
           'I started working as an intern at Rhodia Brazil (Solvay Group), acting as an RPA developer.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Solvay logo',
       },
       {
         period: 'July 2023',
         title: 'Process Mining and Data Engineering',
         description:
           'Still at Rhodia Brazil and as an intern, I started working with the Process Mining team as a data engineer using the Celonis EMS platform.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Solvay logo',
       },
       {
         period: 'September 2024 - Present',
         title: 'Fullstack Developer at Govtech',
         description:
           'I work as a Fullstack Developer at Govtech (Grupo Negócios Públicos).',
+        logoSrc: '/company-logos/grupo-negocios-publicos.png',
+        logoAlt: 'Grupo Negócios Públicos logo',
       },
     ],
   },

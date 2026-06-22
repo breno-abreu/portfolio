@@ -1,0 +1,324 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: #fbf7ef;
+}
+
+html.dark {
+  background: #0a0a0a;
+  color-scheme: dark;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100dvh;
+  margin: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #8b5cf6;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  @apply fixed left-4 top-4 z-50 -translate-y-20 rounded-full bg-violet-600 px-4 py-2 text-sm font-semibold text-white transition-transform duration-200 focus:translate-y-0;
+}
+
+.site-navbar {
+  @apply sticky top-0 z-40 border-b border-stone-200/80 bg-[#fbf7ef]/85 text-neutral-950 backdrop-blur-xl transition-colors duration-300 dark:border-neutral-800/80 dark:bg-neutral-950/85 dark:text-neutral-50;
+  box-shadow:
+    0 12px 26px -20px rgb(15 23 42 / 0.55),
+    0 2px 10px -8px rgb(15 23 42 / 0.35);
+}
+
+.dark .site-navbar {
+  box-shadow:
+    0 14px 28px -20px rgb(0 0 0 / 0.8),
+    0 2px 12px -8px rgb(0 0 0 / 0.7);
+}
+
+.navbar-inner {
+  @apply flex w-full items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8;
+}
+
+.brand-link {
+  @apply shrink-0 text-sm font-semibold uppercase tracking-[0.22em] text-neutral-950 transition-colors hover:text-violet-700 dark:text-neutral-50 dark:hover:text-violet-200;
+}
+
+.nav-list {
+  @apply flex items-center gap-1 overflow-x-auto whitespace-nowrap py-1 [scrollbar-width:none];
+}
+
+.nav-list::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-link {
+  @apply rounded-full px-3 py-2 text-sm font-medium text-neutral-600 transition duration-200 hover:bg-neutral-200/70 hover:text-neutral-950 dark:text-neutral-300 dark:hover:bg-neutral-800/80 dark:hover:text-neutral-50;
+}
+
+.navbar-actions {
+  @apply flex shrink-0 items-center justify-end gap-3;
+}
+
+.language-switcher {
+  @apply inline-flex items-center gap-1 rounded-full border border-neutral-300 bg-white/80 p-1 shadow-sm backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/80;
+}
+
+.language-button {
+  @apply inline-flex h-8 w-10 items-center justify-center rounded-full opacity-55 transition duration-200 hover:opacity-100 focus-visible:opacity-100 data-[active=true]:bg-violet-100 data-[active=true]:opacity-100 data-[active=true]:shadow-sm data-[active=true]:ring-1 data-[active=true]:ring-violet-300 dark:data-[active=true]:bg-violet-500/20 dark:data-[active=true]:ring-violet-300/50;
+}
+
+.control-button {
+  @apply inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white/80 px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-violet-400 hover:text-violet-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-100 dark:hover:border-violet-300 dark:hover:text-violet-200;
+}
+
+.language-flag {
+  @apply h-5 w-7 rounded-[0.25rem] object-cover shadow-sm ring-1 ring-black/10 dark:ring-white/15;
+}
+
+.control-icon {
+  @apply size-[1.125rem] shrink-0;
+}
+
+.page-section {
+  @apply min-h-[48dvh] scroll-mt-24 px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12;
+}
+
+.home-section {
+  @apply min-h-0 pt-8 sm:pt-10 lg:pt-12;
+}
+
+.hero-button {
+  @apply inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-sm transition duration-200 hover:-translate-y-0.5 focus-visible:-translate-y-0.5;
+}
+
+.hero-icon-button {
+  @apply inline-flex size-12 items-center justify-center rounded-full text-sm font-semibold shadow-sm transition duration-200 hover:-translate-y-0.5 focus-visible:-translate-y-0.5;
+}
+
+.hero-button-primary {
+  @apply bg-neutral-950 text-white hover:bg-violet-700 dark:bg-white dark:text-neutral-950 dark:hover:bg-violet-100;
+}
+
+.hero-button-secondary {
+  @apply border border-neutral-300 bg-white/80 text-neutral-800 backdrop-blur hover:border-violet-400 hover:text-violet-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-100 dark:hover:border-violet-300 dark:hover:text-violet-200;
+}
+
+.email-copy-button {
+  @apply inline-flex size-8 items-center justify-center rounded-full border border-neutral-300 bg-white/80 text-neutral-600 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-violet-400 hover:text-violet-700 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-neutral-300 dark:hover:border-violet-300 dark:hover:text-violet-200;
+}
+
+.journey-prime-timeline {
+  @apply mt-10;
+}
+
+.journey-prime-timeline .p-timeline-event {
+  @apply flex min-h-40;
+}
+
+.journey-prime-timeline .p-timeline-event:nth-child(even) {
+  @apply flex-row-reverse;
+}
+
+.journey-prime-timeline .p-timeline-event-opposite,
+.journey-prime-timeline .p-timeline-event-content {
+  @apply flex-1 px-5 pb-8;
+}
+
+.journey-prime-timeline .p-timeline-event-opposite {
+  @apply flex items-center;
+}
+
+.journey-prime-timeline .p-timeline-event:nth-child(odd) .p-timeline-event-opposite {
+  @apply justify-end text-right;
+}
+
+.journey-prime-timeline .p-timeline-event:nth-child(even) .p-timeline-event-opposite {
+  @apply justify-start;
+}
+
+.journey-prime-timeline .p-timeline-event-separator {
+  @apply flex flex-col items-center;
+}
+
+.journey-prime-timeline .p-timeline-event-connector {
+  @apply w-px flex-1 bg-violet-200 dark:bg-violet-400/30;
+}
+
+.journey-prime-timeline .p-timeline-event:first-child .p-timeline-event-connector:first-child,
+.journey-prime-timeline .p-timeline-event:last-child .p-timeline-event-connector:last-child {
+  @apply bg-transparent;
+}
+
+.journey-marker {
+  @apply relative z-10 block size-4 rounded-full border-4 border-[#fbf7ef] bg-violet-600 shadow-sm dark:border-neutral-950 dark:bg-violet-300;
+}
+
+.journey-date {
+  @apply inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-violet-700 dark:bg-violet-400/10 dark:text-violet-300;
+}
+
+.journey-card {
+  @apply rounded-[1.5rem] border border-neutral-200 bg-white/70 p-5 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-1 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/60;
+}
+
+.journey-date-mobile {
+  @apply mb-3 lg:hidden;
+}
+
+.journey-prime-timeline .p-timeline-event:nth-child(even) .journey-card {
+  @apply lg:text-right;
+}
+
+@media (max-width: 1023px) {
+  .journey-prime-timeline .p-timeline-event {
+    @apply min-h-0 flex-row;
+  }
+
+  .journey-prime-timeline .p-timeline-event-opposite {
+    @apply hidden;
+  }
+
+  .journey-prime-timeline .p-timeline-event-content {
+    @apply px-0 pb-8 pl-5;
+  }
+}
+
+.project-card {
+  @apply grid items-center gap-8 rounded-[2rem] border border-neutral-200 bg-white/55 p-4 shadow-sm backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/50 lg:grid-cols-2 lg:gap-10 lg:p-6;
+}
+
+.project-card[data-reversed='true'] .project-image-wrap {
+  @apply lg:order-2;
+}
+
+.project-card[data-reversed='true'] .project-content {
+  @apply lg:order-1;
+}
+
+.project-image-wrap {
+  @apply overflow-hidden rounded-[1.5rem] bg-neutral-200 shadow-lg shadow-neutral-950/10 dark:bg-neutral-800 dark:shadow-black/30;
+}
+
+.project-image {
+  @apply aspect-[16/10] w-full object-cover transition duration-500 hover:scale-105;
+}
+
+.project-content {
+  @apply p-2 sm:p-4;
+}
+
+.project-tech {
+  @apply rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-sm font-medium text-violet-700 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200;
+}
+
+.skill-card {
+  @apply rounded-[1.5rem] border border-neutral-200 bg-white/60 p-5 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-1 hover:border-violet-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/55 dark:hover:border-violet-400/30;
+}
+
+.skill-icon {
+  @apply inline-flex size-12 items-center justify-center rounded-2xl bg-violet-100 text-2xl text-violet-700 dark:bg-violet-400/10 dark:text-violet-300;
+}
+
+.skill-brand-icon {
+  @apply max-h-7 max-w-9 object-contain;
+  filter: brightness(0) saturate(100%) invert(26%) sepia(97%) saturate(2500%)
+    hue-rotate(255deg) brightness(88%) contrast(102%);
+}
+
+.dark .skill-brand-icon {
+  filter: brightness(0) saturate(100%) invert(78%) sepia(50%) saturate(690%)
+    hue-rotate(212deg) brightness(101%) contrast(98%);
+}
+
+.hobby-card {
+  @apply rounded-[2rem] border border-neutral-200 bg-white/60 p-5 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-violet-200 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/55 dark:hover:border-violet-400/30;
+}
+
+.hobby-photo-stack {
+  @apply relative mx-auto block h-64 w-full max-w-sm cursor-pointer rounded-[1.75rem] border-0 bg-transparent p-0;
+}
+
+.hobby-photo {
+  @apply absolute left-1/2 top-1/2 aspect-[4/3] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-[1.5rem] border-4 border-[#fbf7ef] object-cover shadow-xl shadow-neutral-950/15 transition duration-500 ease-out dark:border-neutral-950 dark:shadow-black/30;
+}
+
+.hobby-photo[data-index='0'] {
+  @apply z-30 rotate-[-6deg];
+}
+
+.hobby-photo[data-index='1'] {
+  @apply z-20 rotate-[4deg] scale-[0.95];
+}
+
+.hobby-photo[data-index='2'] {
+  @apply z-10 rotate-[12deg] scale-90;
+}
+
+.hobby-card:hover .hobby-photo[data-index='0'],
+.hobby-photo-stack:focus-visible .hobby-photo[data-index='0'] {
+  @apply -translate-x-[86%] -translate-y-[54%] rotate-[-10deg];
+}
+
+.hobby-card:hover .hobby-photo[data-index='1'],
+.hobby-photo-stack:focus-visible .hobby-photo[data-index='1'] {
+  @apply -translate-x-1/2 -translate-y-[48%] rotate-[1deg] scale-100;
+}
+
+.hobby-card:hover .hobby-photo[data-index='2'],
+.hobby-photo-stack:focus-visible .hobby-photo[data-index='2'] {
+  @apply -translate-x-[14%] -translate-y-[42%] rotate-[10deg] scale-95;
+}
+
+.hobby-gallery-image {
+  @apply max-h-[78dvh] max-w-[92vw] rounded-[1.5rem] object-contain shadow-2xl shadow-black/40;
+}
+
+.hobby-gallery-thumbnail {
+  @apply h-16 w-24 rounded-lg object-cover;
+}
+
+.p-galleria-mask {
+  @apply bg-black/85 backdrop-blur-sm;
+}
+
+.p-galleria .p-galleria-thumbnail-container,
+.p-galleria .p-galleria-item-nav {
+  @apply bg-transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

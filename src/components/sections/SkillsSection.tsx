@@ -62,7 +62,7 @@ export function SkillsSection({ content }: SkillsSectionProps) {
           </p>
           <h2
             id="skills-title"
-            className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl"
+            className="section-title mt-4 text-4xl font-semibold tracking-tight sm:text-5xl"
           >
             {content.title}
           </h2>

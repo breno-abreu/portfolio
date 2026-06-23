@@ -43,7 +43,7 @@ export function HomeSection({ content }: HomeSectionProps) {
 
           <h1
             id="home-title"
-            className="text-5xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
+            className="home-name text-5xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
           >
             {content.name}
           </h1>

@@ -1,0 +1,4 @@
+- Adicionar logo
+- Adicionar os dois primeiros projetos após estarem concluídos
+- Revisitar tipografia
+- Revisar textos inglês e português

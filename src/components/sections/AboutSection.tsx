@@ -24,7 +24,7 @@ export function AboutSection({ content }: AboutSectionProps) {
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-green-700">
             {content.eyebrow}
           </p>
-          <h2 id="about-title" className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h2 id="about-title" className="section-title mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
             {content.title}
           </h2>
         </div>

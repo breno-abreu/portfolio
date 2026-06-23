@@ -8,7 +8,8 @@ export type ProjectItem = {
   imageAlt: string
   technologies: string[]
   githubUrl: string
-  demoUrl: string
+  demoUrl?: string
+  demoLabel?: string
 }
 
 export type ProjectContent = {
@@ -29,7 +30,7 @@ export function ProjectSection({ content }: ProjectSectionProps) {
     <section id="project" className="page-section" aria-labelledby="project-title">
       <div className="mx-auto w-full max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-700 dark:text-amber-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-green-700">
             {content.eyebrow}
           </p>
           <h2
@@ -52,15 +53,15 @@ export function ProjectSection({ content }: ProjectSectionProps) {
               </div>
 
               <div className="project-content">
-                <h3 className="text-2xl font-semibold text-neutral-950 dark:text-neutral-50">
+                <h3 className="text-2xl font-semibold text-neutral-950">
                   {project.title}
                 </h3>
-                <p className="mt-4 leading-7 text-neutral-700 dark:text-neutral-300">
+                <p className="mt-4 leading-7 text-neutral-700">
                   {project.description}
                 </p>
 
                 <div className="mt-5">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-700 dark:text-amber-300">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-green-700">
                     {content.technologiesLabel}
                   </p>
                   <ul className="mt-3 flex flex-wrap gap-2">
@@ -82,15 +83,17 @@ export function ProjectSection({ content }: ProjectSectionProps) {
                     <FaGithub className="size-5" aria-hidden="true" />
                     {content.githubLabel}
                   </a>
-                  <a
-                    className="hero-button hero-button-secondary"
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <ExternalLink className="size-5" aria-hidden="true" />
-                    {content.demoLabel}
-                  </a>
+                  {project.demoUrl ? (
+                    <a
+                      className="hero-button hero-button-secondary"
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <ExternalLink className="size-5" aria-hidden="true" />
+                      {project.demoLabel ?? content.demoLabel}
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </article>

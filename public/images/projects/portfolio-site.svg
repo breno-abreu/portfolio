@@ -1,0 +1,21 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Personal portfolio preview</title>
+  <desc id="desc">Abstract preview of a personal portfolio interface</desc>
+  <rect width="1200" height="800" rx="48" fill="#FBF7EF"/>
+  <rect x="96" y="88" width="1008" height="96" rx="32" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="4"/>
+  <circle cx="160" cy="136" r="16" fill="#15803D"/>
+  <rect x="216" y="124" width="168" height="24" rx="12" fill="#171717"/>
+  <rect x="692" y="124" width="72" height="24" rx="12" fill="#86EFAC"/>
+  <rect x="792" y="124" width="72" height="24" rx="12" fill="#86EFAC"/>
+  <rect x="892" y="124" width="72" height="24" rx="12" fill="#86EFAC"/>
+  <rect x="96" y="256" width="516" height="360" rx="40" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="4"/>
+  <rect x="152" y="320" width="260" height="28" rx="14" fill="#171717"/>
+  <rect x="152" y="376" width="368" height="18" rx="9" fill="#A3A3A3"/>
+  <rect x="152" y="420" width="312" height="18" rx="9" fill="#A3A3A3"/>
+  <rect x="152" y="500" width="136" height="52" rx="26" fill="#171717"/>
+  <rect x="312" y="500" width="136" height="52" rx="26" fill="#15803D"/>
+  <rect x="704" y="256" width="400" height="360" rx="40" fill="#171717"/>
+  <circle cx="904" cy="436" r="116" fill="#15803D"/>
+  <path d="M850 438l38 38 78-92" stroke="#FBF7EF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="184" y="672" width="832" height="16" rx="8" fill="#DCFCE7"/>
+</svg>

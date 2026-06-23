@@ -1,6 +1,6 @@
 # Portfolio Pessoal
 
-Esqueleto inicial de um portfolio pessoal criado com React, Vite, TypeScript e Tailwind CSS.
+Portfolio pessoal criado com React, Vite, TypeScript e Tailwind CSS.
 
 ## Scripts
 
@@ -17,7 +17,7 @@ Antes de evoluir conteudo, design, secoes ou interacoes, consulte `DIRETRIZES.md
 ## Estado Atual
 
 - Aplicacao frontend sem backend, API ou banco de dados.
-- Single page application preparada para ser organizada por secoes/componentes.
-- Suporte inicial a Portugues/Ingles.
-- Suporte inicial a modo claro/escuro.
+- Single page application organizada por secoes/componentes.
+- Suporte a Portugues/Ingles.
+- Interface em modo claro.
 - CSS global em `src/index.css`.

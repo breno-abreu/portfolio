@@ -2,10 +2,13 @@ import { Timeline } from 'primereact/timeline'
 
 export type JourneyItem = {
   period: string
+  duration?: string
   title: string
   description: string
-  logoSrc: string
-  logoAlt: string
+  linkHref?: string
+  linkLabel?: string
+  logoSrc?: string
+  logoAlt?: string
 }
 
 export type JourneyContent = {
@@ -21,23 +24,38 @@ type JourneySectionProps = {
 export function JourneySection({ content }: JourneySectionProps) {
   const markerTemplate = () => <span className="journey-marker" aria-hidden="true" />
 
-  const oppositeTemplate = (item: JourneyItem) => (
-    <span className="journey-date">{item.period}</span>
+  const dateTemplate = (item: JourneyItem, isMobile = false) => (
+    <span className={isMobile ? 'journey-date-group journey-date-mobile' : 'journey-date-group'}>
+      <span className="journey-date">{item.period}</span>
+      {item.duration ? <span className="journey-duration">{item.duration}</span> : null}
+    </span>
   )
+
+  const oppositeTemplate = (item: JourneyItem) => dateTemplate(item)
 
   const contentTemplate = (item: JourneyItem) => (
     <article className="journey-card">
-      <span className="journey-date journey-date-mobile">{item.period}</span>
+      {dateTemplate(item, true)}
       <div className="journey-card-header">
-        <span className="journey-logo-wrap">
-          <img src={item.logoSrc} alt={item.logoAlt} className="journey-logo" />
-        </span>
-        <h3 className="text-xl font-semibold text-neutral-950 dark:text-neutral-50">
+        {item.logoSrc ? (
+          <span className="journey-logo-wrap">
+            <img src={item.logoSrc} alt={item.logoAlt ?? ''} className="journey-logo" />
+          </span>
+        ) : null}
+        <h3 className="text-xl font-semibold text-neutral-950">
           {item.title}
         </h3>
       </div>
-      <p className="mt-3 leading-7 text-neutral-700 dark:text-neutral-300">
+      <p className="mt-3 leading-7 text-neutral-700">
         {item.description}
+        {item.linkHref && item.linkLabel ? (
+          <>
+            {' '}
+            <a className="journey-link" href={item.linkHref} target="_blank" rel="noreferrer">
+              {item.linkLabel}
+            </a>
+          </>
+        ) : null}
       </p>
     </article>
   )
@@ -46,7 +64,7 @@ export function JourneySection({ content }: JourneySectionProps) {
     <section id="journey" className="page-section" aria-labelledby="journey-title">
       <div className="mx-auto w-full max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-700 dark:text-amber-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-green-700">
             {content.eyebrow}
           </p>
           <h2

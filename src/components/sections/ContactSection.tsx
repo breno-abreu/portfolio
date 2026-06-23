@@ -14,7 +14,7 @@ export type ContactContent = {
   copyEmailLabel: string
   copiedEmailLabel: string
   resumeLabel: string
-  resumeUnavailableLabel: string
+  resumeUrl: string
 }
 
 type ContactSectionProps = {
@@ -35,7 +35,7 @@ export function ContactSection({ content }: ContactSectionProps) {
       <div className="mx-auto w-full max-w-7xl">
         <div className="contact-card">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-700 dark:text-amber-300">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-green-700">
               {content.eyebrow}
             </p>
             <h2
@@ -44,7 +44,7 @@ export function ContactSection({ content }: ContactSectionProps) {
             >
               {content.title}
             </h2>
-            <p className="mt-5 text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+            <p className="mt-5 text-lg leading-8 text-neutral-700">
               {content.description}
             </p>
           </div>
@@ -70,22 +70,23 @@ export function ContactSection({ content }: ContactSectionProps) {
             >
               <FaLinkedinIn className="size-5" aria-hidden="true" />
             </a>
-            <button
-              type="button"
-              className="hero-button hero-button-secondary disabled:cursor-not-allowed disabled:opacity-55"
-              disabled
-              aria-label={content.resumeUnavailableLabel}
+            <a
+              className="hero-button hero-button-secondary"
+              href={content.resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={content.resumeLabel}
             >
               <FileText className="size-5" aria-hidden="true" />
               {content.resumeLabel}
-            </button>
+            </a>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
-            <Mail className="size-4 text-amber-700 dark:text-amber-300" aria-hidden="true" />
+          <div className="mt-8 flex flex-wrap items-center gap-2 text-sm text-neutral-600">
+            <Mail className="size-4 text-green-700" aria-hidden="true" />
             <span>
               {content.emailLabel}:{' '}
-              <span className="font-medium text-neutral-900 dark:text-neutral-50">
+              <span className="font-medium text-neutral-900">
                 {EMAIL}
               </span>
             </span>

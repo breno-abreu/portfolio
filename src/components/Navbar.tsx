@@ -1,5 +1,6 @@
-import { Moon, Sun } from 'lucide-react'
-import type { Language, Theme } from '../App'
+import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
+import type { Language } from '../App'
 
 type NavItem = {
   label: string
@@ -8,40 +9,46 @@ type NavItem = {
 
 type NavbarProps = {
   language: Language
-  theme: Theme
   text: Record<string, string>
   navItems: NavItem[]
   activeSection: string
   onLanguageChange: (language: Language) => void
-  onThemeChange: (theme: Theme) => void
+  onNavItemClick: (sectionId: string) => void
 }
 
 export function Navbar({
   language,
-  theme,
   text,
   navItems,
   activeSection,
   onLanguageChange,
-  onThemeChange,
+  onNavItemClick,
 }: NavbarProps) {
-  const nextTheme = theme === 'light' ? 'dark' : 'light'
-  const nextThemeText = nextTheme === 'dark' ? text.switchToDark : text.switchToLight
-  const ThemeIcon = nextTheme === 'dark' ? Moon : Sun
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const languageOptions = [
     { code: 'pt' as const, label: text.switchToPortuguese },
     { code: 'en' as const, label: text.switchToEnglish },
   ]
 
+  function handleNavClick(sectionId: string) {
+    onNavItemClick(sectionId)
+    setIsMenuOpen(false)
+  }
+
   return (
     <header className="site-navbar">
       <div className="navbar-inner">
         <div className="flex min-w-0 flex-1 items-center gap-6">
-          <a className="brand-link" href="#home" aria-label="Breno Abreu">
+          <a
+            className="brand-link"
+            href="#home"
+            aria-label="Breno Abreu"
+            onClick={() => handleNavClick('home')}
+          >
             Breno Abreu
           </a>
 
-          <nav className="min-w-0 flex-1" aria-label="Navegacao principal">
+          <nav className="desktop-nav" aria-label="Navegacao principal">
             <ul className="nav-list">
               {navItems.map((item) => {
                 const isActive = item.href === `#${activeSection}`
@@ -53,6 +60,7 @@ export function Navbar({
                       href={item.href}
                       data-active={isActive}
                       aria-current={isActive ? 'true' : undefined}
+                      onClick={() => handleNavClick(item.href.replace('#', ''))}
                     >
                       {item.label}
                     </a>
@@ -64,6 +72,21 @@ export function Navbar({
         </div>
 
         <div className="navbar-actions" aria-label="Preferencias da pagina">
+          <button
+            type="button"
+            className="mobile-menu-button"
+            aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen((current) => !current)}
+          >
+            {isMenuOpen ? (
+              <X className="size-5" aria-hidden="true" />
+            ) : (
+              <Menu className="size-5" aria-hidden="true" />
+            )}
+          </button>
+
           <div className="language-switcher" aria-label={text.languageLabel}>
             {languageOptions.map((option) => (
               <button
@@ -86,17 +109,32 @@ export function Navbar({
               </button>
             ))}
           </div>
-          <button
-            type="button"
-            className="control-button"
-            onClick={() => onThemeChange(nextTheme)}
-            aria-label={`${text.themeLabel}: ${nextThemeText}`}
-          >
-            <ThemeIcon className="control-icon" size={18} strokeWidth={2} aria-hidden="true" />
-            {nextThemeText}
-          </button>
         </div>
       </div>
+
+      {isMenuOpen ? (
+        <nav id="mobile-navigation" className="mobile-nav-panel" aria-label="Navegacao mobile">
+          <ul className="mobile-nav-list">
+            {navItems.map((item) => {
+              const isActive = item.href === `#${activeSection}`
+
+              return (
+                <li key={item.href}>
+                  <a
+                    className="mobile-nav-link"
+                    href={item.href}
+                    data-active={isActive}
+                    aria-current={isActive ? 'true' : undefined}
+                    onClick={() => handleNavClick(item.href.replace('#', ''))}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
+      ) : null}
     </header>
   )
 }

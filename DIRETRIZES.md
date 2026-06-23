@@ -4,7 +4,7 @@ Este documento deve ser consultado antes de novas etapas de desenvolvimento para
 
 ## Objetivo
 
-Criar um portfolio pessoal moderno, bonito, acessivel e criativo, com foco em apresentar capacidade tecnica e bom senso visual. Nesta fase, o projeto deve permanecer como esqueleto funcional, sem conteudo definitivo e sem design final.
+Criar e manter um portfolio pessoal moderno, bonito, acessivel e criativo, com foco em apresentar capacidade tecnica, experiencia profissional, projetos e bom senso visual.
 
 ## Stack
 
@@ -20,9 +20,8 @@ Criar um portfolio pessoal moderno, bonito, acessivel e criativo, com foco em ap
 - O portfolio sera uma single page application.
 - Mesmo sendo uma pagina unica, cada secao deve ser separada em componentes proprios.
 - Componentes de secao devem usar nomes em ingles, como `HomeSection`, `AboutSection` e `ContactSection`.
-- As secoes finais ainda serao definidas. Por enquanto, manter placeholders simples e bem organizados.
-- Evitar adicionar conteudo definitivo antes da etapa de conteudo.
-- Evitar design visual definitivo antes da etapa de design.
+- As secoes devem permanecer organizadas por componentes, com conteudo centralizado nas estruturas de dados da aplicacao.
+- Ao evoluir conteudo ou design, preservar consistencia visual, responsividade e clareza de manutencao.
 - Quando forem necessarios icones na interface, utilizar `lucide-react`. Para marcas que nao existam no Lucide, usar `react-icons`.
 - A navegacao principal deve permanecer visivel durante a rolagem e apontar para secoes internas da pagina.
 
@@ -35,14 +34,12 @@ Criar um portfolio pessoal moderno, bonito, acessivel e criativo, com foco em ap
 
 ## Tema
 
-- O projeto deve suportar modo claro e modo escuro.
-- O tema deve ser refletido no elemento raiz para permitir estilos globais com Tailwind.
-- Componentes novos devem considerar os dois temas desde o inicio.
-- A preferencia de tema pode ser salva localmente no navegador, sem backend.
+- O projeto deve utilizar apenas modo claro.
+- Componentes novos devem manter consistencia com a paleta clara global.
 
 ## Animacoes
 
-- O design final deve incluir boa quantidade de microanimacoes.
+- O design deve incluir boa quantidade de microanimacoes.
 - Animacoes devem reforcar interacao, hierarquia e polimento, sem atrapalhar leitura ou desempenho.
 - Respeitar `prefers-reduced-motion` para acessibilidade.
 
@@ -50,8 +47,8 @@ Criar um portfolio pessoal moderno, bonito, acessivel e criativo, com foco em ap
 
 - Usar HTML semantico: `header`, `main`, `section`, titulos hierarquicos e botoes reais.
 - Manter foco visivel e navegacao por teclado.
-- Usar textos acessiveis em controles de idioma, tema e navegacao.
-- Garantir contraste adequado nos modos claro e escuro.
+- Usar textos acessiveis em controles de idioma e navegacao.
+- Garantir contraste adequado no modo claro.
 - Evitar depender apenas de cor ou animacao para comunicar informacao.
 - Manter layout responsivo para mobile, tablet e desktop.
 

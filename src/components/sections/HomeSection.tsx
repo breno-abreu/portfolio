@@ -16,7 +16,7 @@ export type HomeContent = {
   copyEmailLabel: string
   copiedEmailLabel: string
   resumeLabel: string
-  resumeUnavailableLabel: string
+  resumeUrl: string
 }
 
 type HomeSectionProps = {
@@ -36,7 +36,7 @@ export function HomeSection({ content }: HomeSectionProps) {
     <section id="home" className="page-section home-section" aria-labelledby="home-title">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.78fr)]">
         <div className="max-w-3xl">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-green-800 bg-gradient-to-r from-green-700 to-green-800 px-4 py-2 text-sm font-medium text-white shadow-sm">
             <MapPin className="size-4" aria-hidden="true" />
             {content.location}
           </p>
@@ -47,10 +47,10 @@ export function HomeSection({ content }: HomeSectionProps) {
           >
             {content.name}
           </h1>
-          <p className="mt-5 text-2xl font-medium text-amber-700 dark:text-amber-200">
+          <p className="mt-5 text-2xl font-medium text-green-700">
             {content.role}
           </p>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600 dark:text-neutral-300">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
             {content.intro}
           </p>
 
@@ -75,21 +75,22 @@ export function HomeSection({ content }: HomeSectionProps) {
             >
               <FaLinkedinIn className="size-5" aria-hidden="true" />
             </a>
-            <button
-              type="button"
-              className="hero-button hero-button-secondary disabled:cursor-not-allowed disabled:opacity-55"
-              disabled
-              aria-label={content.resumeUnavailableLabel}
+            <a
+              className="hero-button hero-button-secondary"
+              href={content.resumeUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={content.resumeLabel}
             >
               <FileText className="size-5" aria-hidden="true" />
               {content.resumeLabel}
-            </button>
+            </a>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
             <span>
               {content.emailLabel}:{' '}
-              <span className="font-medium text-neutral-800 dark:text-neutral-100">
+              <span className="font-medium text-neutral-800">
                 {EMAIL}
               </span>
             </span>
@@ -112,10 +113,10 @@ export function HomeSection({ content }: HomeSectionProps) {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-md lg:mr-0">
-          <div className="absolute -inset-4 rounded-[2rem] bg-amber-500/15 blur-2xl dark:bg-amber-300/10" />
+        <div className="group relative mx-auto w-full max-w-md transition duration-500 hover:-translate-y-1 focus-within:-translate-y-1 lg:mr-0">
+          <div className="absolute -inset-5 rounded-[2rem] bg-neutral-500/20 blur-3xl transition duration-500 group-hover:bg-neutral-500/25 group-hover:blur-[2.5rem]" />
           <img
-            className="relative aspect-[4/5] w-full rounded-[2rem] object-cover shadow-2xl shadow-neutral-950/15 ring-1 ring-neutral-950/10 dark:shadow-black/40 dark:ring-white/10"
+            className="relative aspect-[4/5] w-full rounded-[2rem] object-cover shadow-2xl shadow-neutral-950/25 ring-1 ring-neutral-950/10 transition duration-500 group-hover:scale-[1.015] group-hover:shadow-neutral-950/30"
             src="/images/home-profile.jpg"
             alt={content.photoAlt}
           />

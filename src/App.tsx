@@ -18,29 +18,25 @@ import { ValuesSection } from './components/sections/ValuesSection'
 import type { ValuesContent } from './components/sections/ValuesSection'
 
 export type Language = 'pt' | 'en'
-export type Theme = 'light' | 'dark'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio:language'
-const THEME_STORAGE_KEY = 'portfolio:theme'
 const EXPERIENCE_START_YEAR = 2023
+const RESUME_URL =
+  'https://docs.google.com/document/d/13Ed_C5Bt7cCY0BGdrTreZBnwmcIvmyz4ujherzII7Wc/edit?usp=sharing'
+const PAPER_URL =
+  'https://drive.google.com/file/d/16jimJgUFG_yOOcCM7rDdCO5ru77rWtgX/view?usp=sharing'
 
 const copy = {
   pt: {
     languageLabel: 'Idioma',
-    themeLabel: 'Tema',
     switchToEnglish: 'English',
     switchToPortuguese: 'Português',
-    switchToDark: 'Modo escuro',
-    switchToLight: 'Modo claro',
     skipToContent: 'Pular para o conteúdo',
   },
   en: {
     languageLabel: 'Language',
-    themeLabel: 'Theme',
     switchToEnglish: 'English',
     switchToPortuguese: 'Português',
-    switchToDark: 'Dark mode',
-    switchToLight: 'Light mode',
     skipToContent: 'Skip to content',
   },
 } satisfies Record<Language, Record<string, string>>
@@ -53,7 +49,7 @@ const navItems = {
     { label: 'Projetos', href: '#project' },
     { label: 'Habilidades', href: '#skills' },
     { label: 'Hobbies', href: '#hobbies' },
-    { label: 'Valores', href: '#values' },
+    { label: 'Princípios', href: '#values' },
     { label: 'Contato', href: '#contact' },
   ],
   en: [
@@ -63,7 +59,7 @@ const navItems = {
     { label: 'Project', href: '#project' },
     { label: 'Skills', href: '#skills' },
     { label: 'Hobbies', href: '#hobbies' },
-    { label: 'Values', href: '#values' },
+    { label: 'Principles', href: '#values' },
     { label: 'Contact', href: '#contact' },
   ],
 } satisfies Record<Language, Array<{ label: string; href: string }>>
@@ -75,14 +71,14 @@ const homeContent = {
     location: 'Curitiba, PR, Brasil',
     intro:
       'Olá! Me chamo Breno e desenvolvo aplicações web completas, do frontend ao backend, focadas em simplicidade, performance e experiência do usuário.',
-    photoAlt: 'Foto genérica de perfil que será substituída pela foto de Breno Abreu',
+    photoAlt: 'Imagem de perfil de Breno Abreu',
     githubLabel: 'GitHub',
     linkedinLabel: 'LinkedIn',
     emailLabel: 'Email',
     copyEmailLabel: 'Copiar email',
     copiedEmailLabel: 'Email copiado',
     resumeLabel: 'Currículo',
-    resumeUnavailableLabel: 'Currículo ainda indisponível',
+    resumeUrl: RESUME_URL,
   },
   en: {
     name: 'Breno Abreu',
@@ -90,19 +86,51 @@ const homeContent = {
     location: 'Curitiba, PR, Brazil',
     intro:
       'Hi! My name is Breno and I build complete web applications, from frontend to backend, focused on simplicity, performance, and user experience.',
-    photoAlt: "Generic profile photo that will be replaced by Breno Abreu's photo",
+    photoAlt: 'Profile image of Breno Abreu',
     githubLabel: 'GitHub',
     linkedinLabel: 'LinkedIn',
     emailLabel: 'Email',
     copyEmailLabel: 'Copy email',
     copiedEmailLabel: 'Email copied',
     resumeLabel: 'Resume',
-    resumeUnavailableLabel: 'Resume is not available yet',
+    resumeUrl: RESUME_URL,
   },
 } satisfies Record<Language, HomeContent>
 
 function getExperienceYears() {
   return Math.max(new Date().getFullYear() - EXPERIENCE_START_YEAR, 0)
+}
+
+function getElapsedDurationFrom(startYear: number, startMonthIndex: number, language: Language) {
+  const currentDate = new Date()
+  const totalMonths = Math.max(
+    (currentDate.getFullYear() - startYear) * 12 +
+      currentDate.getMonth() -
+      startMonthIndex +
+      1,
+    1,
+  )
+  const years = Math.floor(totalMonths / 12)
+  const months = totalMonths % 12
+  const parts: string[] = []
+
+  if (years > 0) {
+    parts.push(
+      language === 'pt'
+        ? `${years} ${years === 1 ? 'ano' : 'anos'}`
+        : `${years} ${years === 1 ? 'year' : 'years'}`,
+    )
+  }
+
+  if (months > 0) {
+    parts.push(
+      language === 'pt'
+        ? `${months} ${months === 1 ? 'mês' : 'meses'}`
+        : `${months} ${months === 1 ? 'month' : 'months'}`,
+    )
+  }
+
+  return parts.join(language === 'pt' ? ' e ' : ' and ')
 }
 
 function getAboutContent(experienceYears: number): Record<Language, AboutContent> {
@@ -124,11 +152,13 @@ function getAboutContent(experienceYears: number): Record<Language, AboutContent
             'Detecção de Fraudes em Licitações Públicas: Uma Comparação de Modelos de Detecção de Anomalias',
           after:
             '”. O trabalho foi apresentado no 39º SBBD, o principal evento em Ciência de Dados e Big Data da América Latina.',
-          href: '/documents/deteccao-fraudes-licitacoes-publicas.pdf',
-          downloadLabel:
-            'Baixar PDF do artigo Detecção de Fraudes em Licitações Públicas: Uma Comparação de Modelos de Detecção de Anomalias',
+          href: PAPER_URL,
+          linkLabel:
+            'Abrir artigo Detecção de Fraudes em Licitações Públicas: Uma Comparação de Modelos de Detecção de Anomalias no Google Drive',
         },
-        'Tenho boa autonomia e gosto pelo aprendizado. Possuo inglês avançado e experiência colaborando com equipes globais.',
+        'Tenho boa autonomia, gosto pelo aprendizado e vontade de resolver problemas onde eu possa ver o impacto direto das minhas soluções.',
+        'Meus principais interesses estão no desenvolvimento de aplicações que melhorem a qualidade de vida e do trabalho dos clientes, procurando sempre criar a melhor experiência de usuário. Acredito em tomadas de decisão baseadas em dados mas também no poder da criatividade.',
+        'Possuo inglês avançado e experiência colaborando com equipes globais.',
       ],
     },
     en: {
@@ -143,11 +173,13 @@ function getAboutContent(experienceYears: number): Record<Language, AboutContent
             'Fraud Detection in Public Procurement: A Comparison of Anomaly Detection Models',
           after:
             '”. The work was presented at the 39th SBBD, the leading Data Science and Big Data event in Latin America.',
-          href: '/documents/deteccao-fraudes-licitacoes-publicas.pdf',
-          downloadLabel:
-            'Download PDF of the paper Fraud Detection in Public Procurement: A Comparison of Anomaly Detection Models',
+          href: PAPER_URL,
+          linkLabel:
+            'Open the paper Fraud Detection in Public Procurement: A Comparison of Anomaly Detection Models on Google Drive',
         },
-        'I have strong autonomy and enjoy learning. I have advanced English skills and experience collaborating with global teams.',
+        'I have strong autonomy, enjoy learning, and like solving problems where I can see the direct impact of my solutions.',
+        'My main interests are in developing applications that improve clients’ quality of life and work, always aiming to create the best user experience. I believe in data-driven decision-making, but also in the power of creativity.',
+        'I have advanced English skills and experience collaborating with global teams.',
       ],
     },
   }
@@ -159,40 +191,87 @@ const journeyContent = {
     eyebrow: 'Linha do tempo',
     items: [
       {
-        period: 'Janeiro 2018',
+        period: 'Mar 2018',
         title: 'Ingresso na UTFPR',
         description: 'Ingressei no curso de Bacharelado em Sistemas de Informação na UTFPR.',
         logoSrc: '/company-logos/utfpr.png',
         logoAlt: 'Logo da UTFPR',
       },
       {
-        period: 'Dezembro 2020 - Fevereiro 2021',
-        title: 'Banco de dados para a APRE',
-        description: 'Desenvolvi um banco de dados para a APRE.',
+        period: 'Dez 2020 - Fev 2021',
+        duration: '3 meses',
+        title: 'Criação de um Banco de Dados para a APRE',
+        description:
+          'Realizei a modelagem, o desenvolvimento e a instalação de um banco de dados para a Associação Paranaense de Empresas de Base Florestal (APRE), utilizando MySQL nos servidores da associação e LibreOffice Base como frontend. O projeto foi criado do zero em um contrato freelancer de prestação de serviços.',
         logoSrc: '/company-logos/apre.png',
         logoAlt: 'Logo da APRE',
       },
       {
-        period: 'Dezembro 2021',
-        title: 'Estágio na Rhodia Brasil',
+        period: 'Dez 2021',
+        duration: '1 ano e 7 meses',
+        title: 'Estágio como Desenvolvedor de RPAs e Ferramentas de Análise de Dados na Solvay',
         description:
-          'Comecei a trabalhar como estagiário na Rhodia Brasil (Grupo Solvay), atuando como desenvolvedor de RPAs.',
+          'Atuei no desenvolvimento de Automações Robóticas de Processos (RPA) para o SAP ERP com VBA, criando substituições robóticas virtuais para atividades manuais e reduzindo consideravelmente o tempo de execução de operações. Também desenvolvi ferramentas de análise de dados e automação com Google Apps Script em uma equipe internacional durante o estágio.',
         logoSrc: '/company-logos/solvay.png',
         logoAlt: 'Logo da Solvay',
       },
       {
-        period: 'Julho 2023',
-        title: 'Process Mining e Engenharia de Dados',
+        period: 'Jul 2022',
+        title: 'Finalista no SBS Awards na categoria Deep Simplification na Solvay',
         description:
-          'Ainda na Rhodia Brasil e como estagiário, comecei a trabalhar na equipe de Process Mining como engenheiro de dados utilizando a plataforma Celonis EMS.',
+          'Fui finalista no SBS Awards na categoria Deep Simplification durante minha atuação na Solvay com uma aplicação de busca e análise de dados. A solução gerava gráficos e estatísticas a partir de dados extraídos do SAP por meio de RPAs.',
         logoSrc: '/company-logos/solvay.png',
         logoAlt: 'Logo da Solvay',
       },
       {
-        period: 'Setembro 2024 - Hoje',
-        title: 'Desenvolvedor Fullstack na Govtech',
+        period: 'Out 2022',
+        title: 'Certificado Lean Six Sigma Yellow Belt na Solvay',
         description:
-          'Trabalho como desenvolvedor Fullstack na Govtech (Grupo Negócios Públicos).',
+          'Adquiri a certificação Lean Six Sigma Yellow Belt, fortalecendo minha base em melhoria contínua e análise de processos. Para obter a certificação, participei de um projeto de simplificação de um processo longo e manual de gestão de energia, criando um programa para extrair, organizar e servir os dados finais de forma rápida e padronizada.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Logo da Solvay',
+      },
+      {
+        period: 'Jul 2023 - Dez 2023',
+        duration: '6 meses',
+        title: 'Estágio na equipe de Process Mining como Engenheiro de Dados na Solvay',
+        description:
+          'Participei da extração e transformação de dados do SAP ERP, além do desenvolvimento de automações e ferramentas de análise de dados na equipe de Process Mining. Trabalhei com a plataforma Celonis EMS em uma equipe internacional durante o estágio.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Logo da Solvay',
+      },
+      {
+        period: 'Abr 2024',
+        title: 'Ganhador do melhor artigo na categoria Pesquisa na ERBD 2024',
+        description:
+          'Recebi o prêmio de melhor artigo na categoria Pesquisa na ERBD 2024 com um trabalho sobre detecção de fraudes em licitações públicas.',
+        linkHref: PAPER_URL,
+        linkLabel: 'Ver artigo.',
+        logoSrc: '/company-logos/erbd.png',
+        logoAlt: 'Logo da ERBD 2024',
+      },
+      {
+        period: 'Jul 2024',
+        title: 'Formação no Bacharelado em Sistemas de Informação',
+        description:
+          'Concluí o Bacharelado em Sistemas de Informação pela Universidade Tecnológica Federal do Paraná.',
+        logoSrc: '/company-logos/utfpr.png',
+        logoAlt: 'Logo da UTFPR',
+      },
+      {
+        period: 'Out 2024',
+        title: 'Apresentação de artigo na SBBD 2024',
+        description:
+          'Apresentei meu artigo no SBBD 2024, principal evento em Ciência de Dados e Big Data da América Latina, compartilhando os resultados do estudo sobre detecção de fraudes em licitações públicas.',
+        logoSrc: '/company-logos/sbbd.png',
+        logoAlt: 'Logo da SBBD 2024',
+      },
+      {
+        period: 'Set 2024 - Hoje',
+        duration: getElapsedDurationFrom(2024, 8, 'pt'),
+        title: 'Desenvolvedor Fullstack em Grupo Negócios Públicos',
+        description:
+          'Atualmente trabalho no desenvolvimento de aplicações SPA com ASP.NET, Vue.js e SQL Server para órgãos governamentais e para o próprio grupo. Atuo como desenvolvedor Fullstack no modelo de microsserviços e APIs REST, com experiência bem-sucedida na migração de aplicações monolíticas para microsserviços em um contrato de prestação de serviços em tempo integral.',
         logoSrc: '/company-logos/grupo-negocios-publicos.png',
         logoAlt: 'Logo do Grupo Negócios Públicos',
       },
@@ -203,7 +282,7 @@ const journeyContent = {
     eyebrow: 'Timeline',
     items: [
       {
-        period: 'January 2018',
+        period: 'Mar 2018',
         title: 'Started at UTFPR',
         description:
           "I started the Bachelor's degree in Information Systems at UTFPR.",
@@ -211,33 +290,80 @@ const journeyContent = {
         logoAlt: 'UTFPR logo',
       },
       {
-        period: 'December 2020 - February 2021',
-        title: 'Database for APRE',
-        description: 'I developed a database for APRE.',
+        period: 'Dec 2020 - Feb 2021',
+        duration: '3 months',
+        title: 'Creation of a Database for APRE',
+        description:
+          'I modeled, developed, and installed a database for the Parana Association of Forest-Based Companies (APRE), using MySQL on the association servers and LibreOffice Base as the frontend. The project was built from scratch as a freelance services contract.',
         logoSrc: '/company-logos/apre.png',
         logoAlt: 'APRE logo',
       },
       {
-        period: 'December 2021',
-        title: 'Internship at Rhodia Brazil',
+        period: 'Dec 2021',
+        duration: '1 year and 7 months',
+        title: 'Internship as RPA and Data Analysis Tools Developer at Solvay',
         description:
-          'I started working as an intern at Rhodia Brazil (Solvay Group), acting as an RPA developer.',
+          'I worked on Robotic Process Automation (RPA) development for SAP ERP with VBA, creating virtual robotic replacements for manual tasks and considerably reducing operation execution time. I also developed data analysis and automation tools with Google Apps Script in an international team during the internship.',
         logoSrc: '/company-logos/solvay.png',
         logoAlt: 'Solvay logo',
       },
       {
-        period: 'July 2023',
-        title: 'Process Mining and Data Engineering',
+        period: 'Jul 2022',
+        title: 'Finalist at the SBS Awards in the Deep Simplification category at Solvay',
         description:
-          'Still at Rhodia Brazil and as an intern, I started working with the Process Mining team as a data engineer using the Celonis EMS platform.',
+          'I was a finalist at the SBS Awards in the Deep Simplification category during my time at Solvay with a data search and analysis application. The solution generated charts and statistics from SAP data extracted through RPAs.',
         logoSrc: '/company-logos/solvay.png',
         logoAlt: 'Solvay logo',
       },
       {
-        period: 'September 2024 - Present',
-        title: 'Fullstack Developer at Govtech',
+        period: 'Oct 2022',
+        title: 'Lean Six Sigma Yellow Belt Certification at Solvay',
         description:
-          'I work as a Fullstack Developer at Govtech (Grupo Negócios Públicos).',
+          'I earned the Lean Six Sigma Yellow Belt certification, strengthening my foundation in continuous improvement and process analysis. To obtain the certification, I participated in a project to simplify a long and manual energy management process, creating a program to extract, organize, and serve the final data quickly and consistently.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Solvay logo',
+      },
+      {
+        period: 'Jul 2023 - Dec 2023',
+        duration: '6 months',
+        title: 'Internship in the Process Mining team as a Data Engineer at Solvay',
+        description:
+          'I took part in extracting and transforming SAP ERP data, while also developing automations and data analysis tools within the Process Mining team. I worked with the Celonis EMS platform in an international team during the internship.',
+        logoSrc: '/company-logos/solvay.png',
+        logoAlt: 'Solvay logo',
+      },
+      {
+        period: 'Apr 2024',
+        title: 'Best Paper Award in the Research category at ERBD 2024',
+        description:
+          'I received the best paper award in the Research category at ERBD 2024 for a study on fraud detection in public procurement.',
+        linkHref: PAPER_URL,
+        linkLabel: 'View paper.',
+        logoSrc: '/company-logos/erbd.png',
+        logoAlt: 'ERBD 2024 logo',
+      },
+      {
+        period: 'Jul 2024',
+        title: "Graduated with a Bachelor's degree in Information Systems",
+        description:
+          'I completed the Bachelor of Information Systems degree at the Federal University of Technology - Parana.',
+        logoSrc: '/company-logos/utfpr.png',
+        logoAlt: 'UTFPR logo',
+      },
+      {
+        period: 'Oct 2024',
+        title: 'Presented my paper at SBBD 2024',
+        description:
+          'I presented my paper at SBBD 2024, the leading Data Science and Big Data event in Latin America, sharing the results of the study on fraud detection in public procurement.',
+        logoSrc: '/company-logos/sbbd.png',
+        logoAlt: 'SBBD 2024 logo',
+      },
+      {
+        period: 'Sep 2024 - Present',
+        duration: getElapsedDurationFrom(2024, 8, 'en'),
+        title: 'Fullstack Developer at Grupo Negócios Públicos',
+        description:
+          'I currently develop SPA applications with ASP.NET, Vue.js, and SQL Server for government agencies and for the group itself. I work as a Fullstack Developer using microservices and REST APIs, with successful experience migrating monolithic applications to microservices in a full-time services contract.',
         logoSrc: '/company-logos/grupo-negocios-publicos.png',
         logoAlt: 'Grupo Negócios Públicos logo',
       },
@@ -256,32 +382,42 @@ const projectContent = {
       {
         title: 'Plataforma de Ensino de Piano',
         description:
-          'Projeto dummy para uma plataforma de aprendizado musical que organiza aulas, exercícios e progresso dos alunos em um fluxo simples. A ideia é resolver a dificuldade de acompanhar evolução prática e teoria em um único ambiente.',
+          'Plataforma pensada para melhorar o gerenciamento de aulas de piano, oferecendo um ambiente consolidado para alunos. A aplicação permite reproduzir arquivos MIDI e visualizar as notas tocadas em diferentes andamentos, consultar dicionários de acordes com teclado virtual e realizar exercícios de forma interativa.',
         image: '/images/projects/piano-platform.jpg',
-        imageAlt: 'Imagem genérica representando uma plataforma de ensino de piano',
-        technologies: ['React', 'TypeScript', 'Tailwind', 'Node.js'],
+        imageAlt: 'Imagem representando uma plataforma de ensino de piano',
+        technologies: ['Vue.js', 'JavaScript'],
         githubUrl: 'https://github.com/breno-abreu',
         demoUrl: '#',
       },
       {
         title: 'Sistema de Gerenciamento para Igrejas',
         description:
-          'Projeto dummy para centralizar membros, eventos, grupos e rotinas administrativas de uma igreja. A proposta é reduzir controles manuais e facilitar a organização de informações importantes para a comunidade.',
+          'Aplicação para gerenciamento de igrejas criada para substituir o uso disperso de planilhas e múltiplas ferramentas. A proposta é centralizar agendamentos compartilhados entre ministérios, cronogramas de eventos com acompanhamento em tempo real, repertórios e escalas de louvor e outros ministérios em uma solução customizada e profissional.',
         image: '/images/projects/church-management.jpg',
-        imageAlt: 'Imagem genérica representando gestão e organização para igrejas',
-        technologies: ['Vue.js', 'C#', 'ASP.NET', 'SQL'],
+        imageAlt: 'Imagem representando gestão e organização para igrejas',
+        technologies: ['Vue.js', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL'],
         githubUrl: 'https://github.com/breno-abreu',
         demoUrl: '#',
       },
       {
-        title: 'Paper sobre Fraudes em Licitações',
+        title: 'Artigo sobre Detecção de Fraudes em Licitações Utilizando IA',
         description:
-          'Projeto dummy baseado no artigo sobre detecção de fraudes em licitações públicas. O trabalho compara modelos de detecção de anomalias para apoiar a identificação de padrões suspeitos em dados públicos.',
-        image: '/images/projects/fraud-paper.jpg',
-        imageAlt: 'Imagem genérica representando análise de dados e pesquisa sobre fraudes',
-        technologies: ['Python', 'Data Science', 'Machine Learning', 'SQL'],
-        githubUrl: 'https://github.com/breno-abreu',
-        demoUrl: '#',
+          'Artigo desenvolvido sobre detecção de fraudes em licitações públicas utilizando Inteligência Artificial. O trabalho compara modelos de detecção de anomalias e aprendizado de máquina para apoiar a identificação de padrões suspeitos em dados públicos, sob orientação do professor doutor Luiz Celso Gomes Junior.',
+        image: '/images/projects/fraud-paper-cover.png',
+        imageAlt: 'Capa do artigo Detecção de Fraudes em Licitações Públicas',
+        technologies: ['Python', 'Ciência de Dados', 'Inteligência Artificial'],
+        githubUrl: 'https://github.com/breno-abreu/TCC_Abreu_Pereira',
+        demoUrl: PAPER_URL,
+        demoLabel: 'Artigo',
+      },
+      {
+        title: 'Portfólio Pessoal',
+        description:
+          'Esta própria aplicação de portfólio pessoal: uma frontend de página única criada para apresentar minha trajetória, projetos, habilidades e canais de contato em uma experiência bilíngue, moderna e organizada em seções componentizadas.',
+        image: '/images/projects/portfolio-site.svg',
+        imageAlt: 'Ilustração abstrata representando o portfólio pessoal',
+        technologies: ['React', 'TypeScript', 'Tailwind CSS'],
+        githubUrl: 'https://github.com/breno-abreu/portfolio',
       },
     ],
   },
@@ -295,32 +431,42 @@ const projectContent = {
       {
         title: 'Piano Learning Platform',
         description:
-          'Dummy project for a music learning platform that organizes lessons, exercises, and student progress in a simple flow. The idea is to solve the difficulty of tracking practice and theory in a single environment.',
+          'Platform designed to improve the management of piano lessons by offering a consolidated environment for students. The application allows MIDI file playback with note visualization at different tempos, chord dictionary exploration with a virtual keyboard, and interactive exercises.',
         image: '/images/projects/piano-platform.jpg',
-        imageAlt: 'Generic image representing a piano learning platform',
-        technologies: ['React', 'TypeScript', 'Tailwind', 'Node.js'],
+        imageAlt: 'Image representing a piano learning platform',
+        technologies: ['Vue.js', 'JavaScript'],
         githubUrl: 'https://github.com/breno-abreu',
         demoUrl: '#',
       },
       {
         title: 'Church Management System',
         description:
-          'Dummy project designed to centralize members, events, groups, and administrative routines for a church. The goal is to reduce manual controls and make important community information easier to organize.',
+          'Church management application designed to replace scattered spreadsheets and multiple disconnected tools. The goal is to centralize shared scheduling across ministries, event timelines with real-time tracking, worship repertoires, and ministry rosters in a customized and professional solution.',
         image: '/images/projects/church-management.jpg',
-        imageAlt: 'Generic image representing management and organization for churches',
-        technologies: ['Vue.js', 'C#', 'ASP.NET', 'SQL'],
+        imageAlt: 'Image representing management and organization for churches',
+        technologies: ['Vue.js', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL'],
         githubUrl: 'https://github.com/breno-abreu',
         demoUrl: '#',
       },
       {
-        title: 'Public Procurement Fraud Paper',
+        title: 'Paper on Fraud Detection in Public Procurement Using AI',
         description:
-          'Dummy project based on the paper about fraud detection in public procurement. The work compares anomaly detection models to support the identification of suspicious patterns in public data.',
-        image: '/images/projects/fraud-paper.jpg',
-        imageAlt: 'Generic image representing data analysis and fraud research',
-        technologies: ['Python', 'Data Science', 'Machine Learning', 'SQL'],
-        githubUrl: 'https://github.com/breno-abreu',
-        demoUrl: '#',
+          'Paper developed on fraud detection in public procurement using Artificial Intelligence. The work compares anomaly detection and machine learning models to support the identification of suspicious patterns in public data, under the supervision of Professor Dr. Luiz Celso Gomes Junior.',
+        image: '/images/projects/fraud-paper-cover.png',
+        imageAlt: 'Cover of the paper on fraud detection in public procurement',
+        technologies: ['Python', 'Data Science', 'Artificial Intelligence'],
+        githubUrl: 'https://github.com/breno-abreu/TCC_Abreu_Pereira',
+        demoUrl: PAPER_URL,
+        demoLabel: 'Paper',
+      },
+      {
+        title: 'Personal Portfolio',
+        description:
+          'This personal portfolio application itself: a single-page frontend created to present my journey, projects, skills, and contact channels through a bilingual, modern experience organized into componentized sections.',
+        image: '/images/projects/portfolio-site.svg',
+        imageAlt: 'Abstract illustration representing the personal portfolio',
+        technologies: ['React', 'TypeScript', 'Tailwind CSS'],
+        githubUrl: 'https://github.com/breno-abreu/portfolio',
       },
     ],
   },
@@ -334,67 +480,70 @@ const skillsContent = {
       {
         title: 'Base Técnica Multidisciplinar',
         description:
-          'Conhecimento em Sistemas de Informação, Ciência e Engenharia de Dados, Automação Robótica de Processos (RPA) e Programação Web Full Stack com Microsserviços e APIs REST.',
+          'Conhecimento em Sistemas de Informação, Programação Web Full Stack com Microsserviços e APIs REST, Automação Robótica de Processos (RPA), Ciência e Engenharia de Dados.',
         icon: 'knowledge',
+        keywords: [
+          'Sistemas de Informação',
+          'Full Stack',
+          'REST APIs',
+          'RPA',
+          'Engenharia de Dados',
+          'Ciência de Dados',
+        ],
       },
       {
         title: 'Linguagens de Programação',
         description:
-          'Experiência com C# (ASP.NET), JavaScript (Vue.js), SQL, Python, VBA e Apps Script.',
+          'Experiência com C# (ASP.NET), JavaScript (Vue.js e React), SQL, Python, VBA, Apps Script, HTML e CSS para criação de interfaces web semânticas e responsivas.',
         icon: 'programming',
-      },
-      {
-        title: 'HTML e CSS',
-        description:
-          'Experiência com criação de interfaces web, estruturação semântica e estilização responsiva.',
-        icon: 'web',
+        keywords: ['C#', 'ASP.NET', 'JavaScript', 'Vue.js', 'React', 'Python', 'SQL', 'HTML', 'CSS'],
       },
       {
         title: 'Bancos de Dados',
-        description: 'Experiência com bancos de dados MySQL e SQL Server.',
-        icon: 'database',
-      },
-      {
-        title: 'Celonis EMS',
         description:
-          'Experiência com a plataforma Celonis EMS para Process Mining e Engenharia de Dados.',
-        icon: 'celonis',
+          'Experiência com MySQL e SQL Server em projetos profissionais, além de PostgreSQL em projetos pessoais.',
+        icon: 'database',
+        keywords: ['MySQL', 'SQL Server', 'PostgreSQL', 'SQL', 'Modelagem', 'Consultas'],
       },
       {
         title: 'Metodologias Ágeis',
         description: 'Experiência com Metodologias Ágeis (Agile) em ambientes colaborativos.',
         icon: 'agile',
+        keywords: ['Agile', 'Scrum', 'Kanban', 'Colaboração', 'Sprints'],
       },
       {
-        title: 'SAP ERP',
-        description: 'Conhecimento básico em SAP ERP, voltado para automações.',
-        icon: 'sap',
-      },
-      {
-        title: 'Lean Six Sigma',
+        title: 'Certificações',
         description: 'Certificado Lean Six Sigma no nível Yellow Belt.',
         icon: 'certificate',
+        keywords: ['Lean Six Sigma', 'Yellow Belt', 'Melhoria Contínua'],
       },
       {
-        title: 'Português',
-        description: 'Português nativo.',
-        icon: 'portuguese',
+        title: 'Idiomas',
+        description:
+          'Português nativo e inglês avançado, com experiência colaborando com equipes internacionais.',
+        icon: 'languages',
+        keywords: ['Português', 'Inglês', 'Equipes Globais'],
       },
       {
-        title: 'Inglês',
-        description: 'Inglês avançado, com experiência colaborando com equipes internacionais.',
-        icon: 'english',
+        title: 'Plataformas',
+        description:
+          'Experiência com Celonis EMS para Process Mining e Engenharia de Dados, além de conhecimento básico em SAP ERP voltado para automações.',
+        icon: 'platforms',
+        keywords: ['Celonis EMS', 'Process Mining', 'SAP ERP', 'ETL', 'Análise de Processos'],
       },
       {
         title: 'Deploy e Infraestrutura',
-        description: 'Experiência com Docker, Caddy e VPS para deploy de aplicações.',
+        description:
+          'Experiência com Docker, Caddy e VPS para deploy de aplicações pessoais, incluindo projetos citados neste portfólio.',
         icon: 'deploy',
+        keywords: ['Docker', 'Caddy', 'VPS', 'Deploy', 'Linux'],
       },
       {
         title: 'Assistentes de Programação com IA',
         description:
           'Experiência utilizando Cursor e ChatGPT como auxiliares de programação, pesquisa, revisão e aceleração de desenvolvimento.',
         icon: 'aiTools',
+        keywords: ['Cursor', 'ChatGPT', 'Code Review', 'Pesquisa', 'Produtividade'],
       },
     ],
   },
@@ -405,67 +554,63 @@ const skillsContent = {
       {
         title: 'Multidisciplinary Technical Foundation',
         description:
-          'Knowledge in Information Systems, Data Science and Data Engineering, Robotic Process Automation (RPA), and Full Stack Web Programming with Microservices and REST APIs.',
+          'Knowledge in Information Systems, Full Stack Web Programming with Microservices and REST APIs, Robotic Process Automation (RPA), Data Science, and Data Engineering.',
         icon: 'knowledge',
+        keywords: ['Information Systems', 'Full Stack', 'REST APIs', 'RPA', 'Data Engineering', 'Data Science'],
       },
       {
         title: 'Programming Languages',
         description:
-          'Experience with C# (ASP.NET), JavaScript (Vue.js), SQL, Python, VBA, and Apps Script.',
+          'Experience with C# (ASP.NET), JavaScript (Vue.js and React), SQL, Python, VBA, Apps Script, HTML, and CSS for semantic and responsive web interfaces.',
         icon: 'programming',
-      },
-      {
-        title: 'HTML and CSS',
-        description:
-          'Experience building web interfaces, semantic structure, and responsive styling.',
-        icon: 'web',
+        keywords: ['C#', 'ASP.NET', 'JavaScript', 'Vue.js', 'React', 'Python', 'SQL', 'HTML', 'CSS'],
       },
       {
         title: 'Databases',
-        description: 'Experience with MySQL and SQL Server databases.',
-        icon: 'database',
-      },
-      {
-        title: 'Celonis EMS',
         description:
-          'Experience with the Celonis EMS platform for Process Mining and Data Engineering.',
-        icon: 'celonis',
+          'Experience with MySQL and SQL Server in professional projects, plus PostgreSQL in personal projects.',
+        icon: 'database',
+        keywords: ['MySQL', 'SQL Server', 'PostgreSQL', 'SQL', 'Data Modeling', 'Queries'],
       },
       {
         title: 'Agile Methodologies',
         description: 'Experience with Agile methodologies in collaborative environments.',
         icon: 'agile',
+        keywords: ['Agile', 'Scrum', 'Kanban', 'Collaboration', 'Sprints'],
       },
       {
-        title: 'SAP ERP',
-        description: 'Basic SAP ERP knowledge focused on automation scenarios.',
-        icon: 'sap',
-      },
-      {
-        title: 'Lean Six Sigma',
+        title: 'Certifications',
         description: 'Lean Six Sigma certification at Yellow Belt level.',
         icon: 'certificate',
+        keywords: ['Lean Six Sigma', 'Yellow Belt', 'Continuous Improvement'],
       },
       {
-        title: 'Portuguese',
-        description: 'Native Portuguese speaker.',
-        icon: 'portuguese',
+        title: 'Languages',
+        description:
+          'Native Portuguese and advanced English, with experience collaborating with international teams.',
+        icon: 'languages',
+        keywords: ['Portuguese', 'English', 'Global Teams'],
       },
       {
-        title: 'English',
-        description: 'Advanced English, with experience collaborating with international teams.',
-        icon: 'english',
+        title: 'Platforms',
+        description:
+          'Experience with Celonis EMS for Process Mining and Data Engineering, plus basic SAP ERP knowledge focused on automation scenarios.',
+        icon: 'platforms',
+        keywords: ['Celonis EMS', 'Process Mining', 'SAP ERP', 'ETL', 'Process Analysis'],
       },
       {
         title: 'Deployment and Infrastructure',
-        description: 'Experience with Docker, Caddy, and VPS environments for application deploys.',
+        description:
+          'Experience with Docker, Caddy, and VPS environments for deploying personal applications, including projects featured in this portfolio.',
         icon: 'deploy',
+        keywords: ['Docker', 'Caddy', 'VPS', 'Deploy', 'Linux'],
       },
       {
         title: 'AI Programming Assistants',
         description:
           'Experience using Cursor and ChatGPT as programming assistants for research, review, and faster development workflows.',
         icon: 'aiTools',
+        keywords: ['Cursor', 'ChatGPT', 'Code Review', 'Research', 'Productivity'],
       },
     ],
   },
@@ -481,57 +626,57 @@ const hobbiesContent = {
       {
         title: 'Música e Piano',
         description:
-          'A música faz parte da minha vida desde cedo. Toco piano desde 2004, também arrisco um pouco de violão e guitarra, e tenho uma paixão especial por apresentações ao vivo. Na maior parte dos sábados do ano, toco em público na igreja e ajudo a coordenar e organizar apresentações musicais.',
+          'A música faz parte da minha vida desde cedo. Comecei a estudar piano em 2004 e também arrisco um pouco de violão e guitarra. Tenho paixão em fazer música e tocar ao vivo. Na maior parte dos sábados do ano, toco em público na igreja e ajudo a coordenar e organizar apresentações musicais.',
         images: [
           {
-            src: '/images/hobbies/music/music-1.jpg',
-            alt: 'Foto dummy de partitura musical',
+            src: '/images/hobbies/music/music-4.png',
+            alt: 'Foto tocando teclado em uma apresentação musical',
           },
           {
-            src: '/images/hobbies/music/music-2.jpg',
-            alt: 'Foto dummy de piano',
+            src: '/images/hobbies/music/music-5.png',
+            alt: 'Foto de partituras sobre um piano',
           },
           {
-            src: '/images/hobbies/music/music-3.jpg',
-            alt: 'Foto dummy de apresentação musical',
+            src: '/images/hobbies/music/music-6.png',
+            alt: 'Foto tocando teclado e cantando em uma apresentação',
           },
         ],
       },
       {
         title: 'Fotografia',
         description:
-          'Fotografia é um hobby que une criatividade, atenção a detalhes e vontade de registrar bons momentos. Gosto especialmente de fotografias de paisagens e retratos, e também contribuo gratuitamente com fotografias de eventos locais quando tenho oportunidade.',
+          'Sempre tive vontade de aprender a fotografar e finalmente comprei minha primeira câmera profissional em 2023. Gosto de lidar com aspectos como composição e edição, tentando sempre deixar as fotos com a melhor qualidade possível. Gosto especialmente de fotografias de paisagens e retratos, e também contribuo voluntariamente com fotografias de eventos locais quando tenho oportunidade.',
         images: [
           {
-            src: '/images/hobbies/photography/photo-1.jpg',
-            alt: 'Foto dummy de câmera fotográfica',
+            src: '/images/hobbies/photography/photo-1.png',
+            alt: 'Foto de pôr do sol sobre o mar',
           },
           {
-            src: '/images/hobbies/photography/photo-2.jpg',
-            alt: 'Foto dummy de pessoa fotografando',
+            src: '/images/hobbies/photography/photo-2.png',
+            alt: 'Foto em preto e branco de uma pessoa em uma caverna',
           },
           {
-            src: '/images/hobbies/photography/photo-3.jpg',
-            alt: 'Foto dummy de paisagem',
+            src: '/images/hobbies/photography/photo-3.png',
+            alt: 'Foto macro de trevos com gotas de água',
           },
         ],
       },
       {
         title: 'Bicicleta',
         description:
-          'Andar de bicicleta é minha forma preferida de fazer exercícios. Além do movimento físico, gosto da sensação de liberdade, do contato com o ambiente e da possibilidade de transformar atividade física em um momento leve e prazeroso.',
+          'Andar de bicicleta é minha forma preferida de fazer exercícios. Gosto da sensação de liberdade e do contato com a natureza. Tenho especial apreço em andar em zonas rurais e cidades pequenas, principalmente em lugares onde ainda não tenho tanta familiaridade.',
         images: [
           {
-            src: '/images/hobbies/cycling/cycling-1.jpg',
-            alt: 'Foto dummy de ciclista',
+            src: '/images/hobbies/cycling/cycling-4.png',
+            alt: 'Foto de ciclista descansando ao lado de um lago',
           },
           {
-            src: '/images/hobbies/cycling/cycling-2.jpg',
-            alt: 'Foto dummy de trilha de bicicleta',
+            src: '/images/hobbies/cycling/cycling-5.png',
+            alt: 'Foto de bicicletas em uma ponte sobre um rio',
           },
           {
-            src: '/images/hobbies/cycling/cycling-3.jpg',
-            alt: 'Foto dummy de bicicleta',
+            src: '/images/hobbies/cycling/cycling-6.png',
+            alt: 'Foto de passeio de bicicleta em uma área rural',
           },
         ],
       },
@@ -546,57 +691,57 @@ const hobbiesContent = {
       {
         title: 'Music and Piano',
         description:
-          'Music has been part of my life from an early age. I have played piano since 2004, also play a bit of acoustic and electric guitar, and have a special passion for live performances. Most Saturdays of the year, I play publicly at church and help coordinate and organize musical presentations.',
+          'Music has been part of my life from an early age. I started studying piano in 2004 and also play a bit of acoustic and electric guitar. I am passionate about making music and performing live. Most Saturdays of the year, I play publicly at church and help coordinate and organize musical presentations.',
         images: [
           {
-            src: '/images/hobbies/music/music-1.jpg',
-            alt: 'Dummy photo of sheet music',
+            src: '/images/hobbies/music/music-4.png',
+            alt: 'Photo playing keyboard in a musical performance',
           },
           {
-            src: '/images/hobbies/music/music-2.jpg',
-            alt: 'Dummy photo of a piano',
+            src: '/images/hobbies/music/music-5.png',
+            alt: 'Photo of sheet music on a piano',
           },
           {
-            src: '/images/hobbies/music/music-3.jpg',
-            alt: 'Dummy photo of a musical performance',
+            src: '/images/hobbies/music/music-6.png',
+            alt: 'Photo playing keyboard and singing in a performance',
           },
         ],
       },
       {
         title: 'Photography',
         description:
-          'Photography is a hobby that combines creativity, attention to detail, and the desire to capture meaningful moments. I especially enjoy landscape and portrait photography, and I also contribute free photography for local events whenever I can.',
+          'I had always wanted to learn photography and finally bought my first professional camera in 2023. I enjoy working with composition and editing, always trying to make photos reach the best quality possible. I especially enjoy landscape and portrait photography, and I also voluntarily contribute photos for local events whenever I have the opportunity.',
         images: [
           {
-            src: '/images/hobbies/photography/photo-1.jpg',
-            alt: 'Dummy photo of a camera',
+            src: '/images/hobbies/photography/photo-1.png',
+            alt: 'Photo of a sunset over the sea',
           },
           {
-            src: '/images/hobbies/photography/photo-2.jpg',
-            alt: 'Dummy photo of someone taking pictures',
+            src: '/images/hobbies/photography/photo-2.png',
+            alt: 'Black and white photo of a person in a cave',
           },
           {
-            src: '/images/hobbies/photography/photo-3.jpg',
-            alt: 'Dummy landscape photo',
+            src: '/images/hobbies/photography/photo-3.png',
+            alt: 'Macro photo of clovers with water droplets',
           },
         ],
       },
       {
         title: 'Cycling',
         description:
-          'Cycling is my favorite way to exercise. Beyond the physical movement, I enjoy the sense of freedom, the contact with the environment, and the possibility of turning exercise into a light and enjoyable moment.',
+          'Cycling is my favorite way to exercise. I enjoy the sense of freedom and contact with nature. I have a special appreciation for riding through rural areas and small towns, especially places I am not yet very familiar with.',
         images: [
           {
-            src: '/images/hobbies/cycling/cycling-1.jpg',
-            alt: 'Dummy photo of a cyclist',
+            src: '/images/hobbies/cycling/cycling-4.png',
+            alt: 'Photo of a cyclist resting beside a lake',
           },
           {
-            src: '/images/hobbies/cycling/cycling-2.jpg',
-            alt: 'Dummy photo of a bike trail',
+            src: '/images/hobbies/cycling/cycling-5.png',
+            alt: 'Photo of bicycles on a bridge over a river',
           },
           {
-            src: '/images/hobbies/cycling/cycling-3.jpg',
-            alt: 'Dummy photo of a bicycle',
+            src: '/images/hobbies/cycling/cycling-6.png',
+            alt: 'Photo of a bike ride through a rural area',
           },
         ],
       },
@@ -606,13 +751,13 @@ const hobbiesContent = {
 
 const valuesContent = {
   pt: {
-    title: 'Valores Profissionais e Futuro',
+    title: 'Princípios Profissionais e Futuro',
     eyebrow: 'Direção',
     items: [
       {
-        title: 'Valores profissionais',
+        title: 'Princípios profissionais',
         description:
-          'Meus valores profissionais estão em criar aplicações que resolvam problemas reais, melhorem a qualidade de vida e de trabalho dos usuários, aumentem a velocidade e a facilidade na execução de processos e sejam construídas com criatividade e atenção especial à experiência do usuário. Para mim, uma boa solução precisa ser útil, simples de usar, confiável e alinhada ao contexto de quem realmente vai utilizá-la.',
+          'Meus princípios profissionais estão em criar aplicações que resolvam problemas reais, melhorem a qualidade de vida e de trabalho dos usuários e tornem processos mais rápidos e simples de executar. Procuro sempre construir soluções úteis, confiáveis e fáceis de usar, com criatividade e atenção especial à experiência, às necessidades e ao contexto de quem realmente vai utilizá-las.',
       },
       {
         title: 'Planos para o futuro',
@@ -622,13 +767,13 @@ const valuesContent = {
     ],
   },
   en: {
-    title: 'Professional Values and Future',
+    title: 'Professional Principles and Future',
     eyebrow: 'Direction',
     items: [
       {
-        title: 'Professional values',
+        title: 'Professional principles',
         description:
-          'My professional values are centered on building applications that solve real problems, improve users’ quality of life and work, make processes faster and easier to execute, and are created with creativity and strong attention to user experience. For me, a good solution needs to be useful, simple to use, reliable, and aligned with the context of the people who will actually use it.',
+          'My professional principles are centered on building applications that solve real problems, improve users’ quality of life and work, and make processes faster and easier to execute. I always aim to create useful, reliable, and easy-to-use solutions, combining creativity with strong attention to the experience, needs, and context of the people who will actually use them.',
       },
       {
         title: 'Future plans',
@@ -651,7 +796,7 @@ const contactContent = {
     copyEmailLabel: 'Copiar email',
     copiedEmailLabel: 'Email copiado',
     resumeLabel: 'Currículo',
-    resumeUnavailableLabel: 'Currículo ainda indisponível',
+    resumeUrl: RESUME_URL,
   },
   en: {
     title: 'Contact',
@@ -664,7 +809,7 @@ const contactContent = {
     copyEmailLabel: 'Copy email',
     copiedEmailLabel: 'Email copied',
     resumeLabel: 'Resume',
-    resumeUnavailableLabel: 'Resume is not available yet',
+    resumeUrl: RESUME_URL,
   },
 } satisfies Record<Language, ContactContent>
 
@@ -672,13 +817,8 @@ function getStoredLanguage(): Language {
   return localStorage.getItem(LANGUAGE_STORAGE_KEY) === 'en' ? 'en' : 'pt'
 }
 
-function getStoredTheme(): Theme {
-  return localStorage.getItem(THEME_STORAGE_KEY) === 'dark' ? 'dark' : 'light'
-}
-
 function App() {
   const [language, setLanguage] = useState<Language>(getStoredLanguage)
-  const [theme, setTheme] = useState<Theme>(getStoredTheme)
   const [activeSection, setActiveSection] = useState('home')
   const text = copy[language]
   const aboutContent = getAboutContent(getExperienceYears())
@@ -687,12 +827,6 @@ function App() {
     document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
     localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
   }, [language])
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-    document.documentElement.style.colorScheme = theme
-    localStorage.setItem(THEME_STORAGE_KEY, theme)
-  }, [theme])
 
   useEffect(() => {
     const sectionIds = navItems[language].map((item) => item.href.replace('#', ''))
@@ -722,18 +856,17 @@ function App() {
   }, [language])
 
   return (
-    <div className="min-h-dvh bg-[#fbf7ef] text-neutral-950 transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-50">
+    <div className="min-h-dvh bg-[#fbf7ef] text-neutral-950 transition-colors duration-300">
       <a className="skip-link" href="#main-content">
         {text.skipToContent}
       </a>
       <Navbar
         language={language}
-        theme={theme}
         text={text}
         navItems={navItems[language]}
         activeSection={activeSection}
         onLanguageChange={setLanguage}
-        onThemeChange={setTheme}
+        onNavItemClick={setActiveSection}
       />
       <main id="main-content" className="pb-56">
         <HomeSection content={homeContent[language]} />
@@ -745,7 +878,7 @@ function App() {
         <ValuesSection content={valuesContent[language]} />
         <ContactSection content={contactContent[language]} />
       </main>
-    </div>
+        </div>
   )
 }
 

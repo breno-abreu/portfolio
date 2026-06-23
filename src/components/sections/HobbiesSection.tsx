@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { useState } from 'react'
 import { X } from 'lucide-react'
 import { Galleria } from 'primereact/galleria'
@@ -75,7 +76,12 @@ export function HobbiesSection({ content }: HobbiesSectionProps) {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {content.items.map((hobby, hobbyIndex) => (
-            <article key={hobby.title} className="hobby-card">
+            <article
+              key={hobby.title}
+              className="hobby-card"
+              style={{ '--hobby-card-background': `url(${hobby.images[0].src})` } as CSSProperties}
+            >
+              <div className="hobby-card-background" aria-hidden="true" />
               <button
                 type="button"
                 className="hobby-photo-stack"
@@ -94,10 +100,10 @@ export function HobbiesSection({ content }: HobbiesSectionProps) {
               </button>
 
               <div className="mt-8">
-                <h3 className="text-2xl font-semibold text-neutral-950">
+                <h3 className="text-2xl font-semibold text-white">
                   {hobby.title}
                 </h3>
-                <p className="mt-4 leading-7 text-neutral-700">
+                <p className="mt-4 leading-7 text-white/88">
                   {hobby.description}
                 </p>
               </div>

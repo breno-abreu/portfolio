@@ -529,7 +529,24 @@ a:focus-visible {
 }
 
 .hobby-card {
-  @apply rounded-[2rem] border border-neutral-200 bg-white/60 p-5 shadow-sm backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-green-800 hover:shadow-md;
+  @apply relative isolate rounded-[2rem] bg-neutral-950 p-5 transition duration-300 hover:-translate-y-1;
+}
+
+.hobby-card-background {
+  @apply pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[2rem] bg-neutral-950;
+}
+
+.hobby-card-background::before {
+  @apply absolute -inset-6 bg-cover bg-center opacity-80 blur-md content-[''];
+  background-image: var(--hobby-card-background);
+}
+
+.hobby-card-background::after {
+  @apply absolute inset-0 bg-gradient-to-b from-neutral-950/58 via-neutral-950/68 to-neutral-950/82 content-[''];
+}
+
+.hobby-card > :not(.hobby-card-background) {
+  @apply relative z-10;
 }
 
 .hobby-photo-stack {

@@ -415,7 +415,7 @@ const projectContent = {
         description:
           'Esta própria aplicação de portfólio pessoal: uma frontend de página única criada para apresentar minha trajetória, projetos, habilidades e canais de contato em uma experiência bilíngue, moderna e organizada em seções componentizadas.',
         image: '/images/projects/portfolio-site.svg',
-        imageAlt: 'Ilustração abstrata representando o portfólio pessoal',
+        imageAlt: 'Prévia estilizada da interface do portfólio pessoal',
         technologies: ['React', 'TypeScript', 'Tailwind CSS'],
         githubUrl: 'https://github.com/breno-abreu/portfolio',
       },
@@ -464,7 +464,7 @@ const projectContent = {
         description:
           'This personal portfolio application itself: a single-page frontend created to present my journey, projects, skills, and contact channels through a bilingual, modern experience organized into componentized sections.',
         image: '/images/projects/portfolio-site.svg',
-        imageAlt: 'Abstract illustration representing the personal portfolio',
+        imageAlt: 'Stylized preview of the personal portfolio interface',
         technologies: ['React', 'TypeScript', 'Tailwind CSS'],
         githubUrl: 'https://github.com/breno-abreu/portfolio',
       },
@@ -900,7 +900,7 @@ function App() {
         onLanguageChange={setLanguage}
         onNavItemClick={setActiveSection}
       />
-      <main id="main-content" className="pb-56">
+      <main id="main-content" className="pb-16">
         <HomeSection content={homeContent[language]} />
         <AboutSection content={aboutContent[language]} />
         <JourneySection content={journeyContent[language]} />
@@ -913,9 +913,8 @@ function App() {
       <footer className="site-footer">
         <div className="site-footer-inner">
           <div className="site-footer-info">
-            <p>
-              {footerContent[language].development}
-              <br />
+            <p className="site-footer-development">
+              {footerContent[language].development}{' '}
               <a
                 className="footer-link"
                 href="https://github.com/breno-abreu/portfolio"

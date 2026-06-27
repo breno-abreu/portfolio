@@ -29,11 +29,11 @@ export function AboutSection({ content }: AboutSectionProps) {
           </h2>
         </div>
 
-        <div className="about-card">
+        <div className="max-w-4xl">
           {content.paragraphs.map((paragraph) => (
             <p
               key={typeof paragraph === 'string' ? paragraph : paragraph.title}
-              className="text-lg leading-8 text-neutral-700 not-first:mt-5"
+              className="text-justify text-lg leading-8 text-neutral-700 not-first:mt-5"
             >
               {typeof paragraph === 'string' ? (
                 paragraph
@@ -41,7 +41,7 @@ export function AboutSection({ content }: AboutSectionProps) {
                 <>
                   {paragraph.before}
                   <a
-                    className="font-medium text-green-700 underline decoration-green-300 underline-offset-4 transition-colors hover:text-green-900"
+                    className="font-medium text-green-700 underline decoration-green-700 underline-offset-4 transition-colors hover:text-green-900"
                     href={paragraph.href}
                     target="_blank"
                     rel="noreferrer"

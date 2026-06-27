@@ -1,5 +1,17 @@
-import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import {
+  BriefcaseBusiness,
+  Code2,
+  Compass,
+  Heart,
+  Home,
+  Mail,
+  Menu,
+  Sparkles,
+  UserRound,
+  X,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import type { Language } from '../App'
 
 type NavItem = {
@@ -16,6 +28,17 @@ type NavbarProps = {
   onNavItemClick: (sectionId: string) => void
 }
 
+const mobileNavIcons: Record<string, LucideIcon> = {
+  '#home': Home,
+  '#about': UserRound,
+  '#journey': Compass,
+  '#project': BriefcaseBusiness,
+  '#skills': Code2,
+  '#hobbies': Heart,
+  '#values': Sparkles,
+  '#contact': Mail,
+}
+
 export function Navbar({
   language,
   text,
@@ -25,6 +48,8 @@ export function Navbar({
   onNavItemClick,
 }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const mobileMenuRef = useRef<HTMLElement>(null)
   const languageOptions = [
     { code: 'pt' as const, label: text.switchToPortuguese },
     { code: 'en' as const, label: text.switchToEnglish },
@@ -34,6 +59,33 @@ export function Navbar({
     onNavItemClick(sectionId)
     setIsMenuOpen(false)
   }
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      const target = event.target
+
+      if (!(target instanceof Node)) {
+        return
+      }
+
+      if (
+        mobileMenuRef.current?.contains(target) ||
+        menuButtonRef.current?.contains(target)
+      ) {
+        return
+      }
+
+      setIsMenuOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [isMenuOpen])
 
   return (
     <header className="site-navbar">
@@ -73,6 +125,7 @@ export function Navbar({
 
         <div className="navbar-actions" aria-label="Preferencias da pagina">
           <button
+            ref={menuButtonRef}
             type="button"
             className="mobile-menu-button"
             aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
@@ -113,10 +166,16 @@ export function Navbar({
       </div>
 
       {isMenuOpen ? (
-        <nav id="mobile-navigation" className="mobile-nav-panel" aria-label="Navegacao mobile">
+        <nav
+          ref={mobileMenuRef}
+          id="mobile-navigation"
+          className="mobile-nav-panel"
+          aria-label="Navegacao mobile"
+        >
           <ul className="mobile-nav-list">
             {navItems.map((item) => {
               const isActive = item.href === `#${activeSection}`
+              const Icon = mobileNavIcons[item.href] ?? Compass
 
               return (
                 <li key={item.href}>
@@ -127,7 +186,8 @@ export function Navbar({
                     aria-current={isActive ? 'true' : undefined}
                     onClick={() => handleNavClick(item.href.replace('#', ''))}
                   >
-                    {item.label}
+                    <Icon className="mobile-nav-icon" aria-hidden="true" />
+                    <span>{item.label}</span>
                   </a>
                 </li>
               )

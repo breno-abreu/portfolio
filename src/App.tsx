@@ -56,7 +56,7 @@ const navItems = {
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
     { label: 'Journey', href: '#journey' },
-    { label: 'Project', href: '#project' },
+    { label: 'Projects', href: '#project' },
     { label: 'Skills', href: '#skills' },
     { label: 'Hobbies', href: '#hobbies' },
     { label: 'Principles', href: '#values' },
@@ -294,7 +294,7 @@ const journeyContent = {
         duration: '3 months',
         title: 'Creation of a Database for APRE',
         description:
-          'I modeled, developed, and installed a database for the Parana Association of Forest-Based Companies (APRE), using MySQL on the association servers and LibreOffice Base as the frontend. The project was built from scratch as a freelance services contract.',
+          'I modeled, developed, and installed a database for the Paraná Association of Forest-Based Companies (APRE), using MySQL on the association servers and LibreOffice Base as the frontend. The project was built from scratch as a freelance services contract.',
         logoSrc: '/company-logos/apre.png',
         logoAlt: 'APRE logo',
       },
@@ -346,7 +346,7 @@ const journeyContent = {
         period: 'Jul 2024',
         title: "Graduated with a Bachelor's degree in Information Systems",
         description:
-          'I completed the Bachelor of Information Systems degree at the Federal University of Technology - Parana.',
+          'I completed the Bachelor of Information Systems degree at the Federal University of Technology - Paraná.',
         logoSrc: '/company-logos/utfpr.png',
         logoAlt: 'UTFPR logo',
       },
@@ -710,7 +710,7 @@ const hobbiesContent = {
       {
         title: 'Photography',
         description:
-          'I had always wanted to learn photography and finally bought my first professional camera in 2023. I enjoy working with composition and editing, always trying to make photos reach the best quality possible. I especially enjoy landscape and portrait photography, and I also voluntarily contribute photos for local events whenever I have the opportunity.',
+          'I had always wanted to learn photography and finally bought my first professional camera in 2023. I enjoy working with composition and editing, always trying to make photos reach the best quality possible. I especially enjoy landscape and portrait photography, and I also volunteer as a photographer for local events whenever I have the opportunity.',
         images: [
           {
             src: '/images/hobbies/photography/photo-1.png',

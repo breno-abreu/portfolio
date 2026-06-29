@@ -169,19 +169,19 @@ a:focus-visible {
 }
 
 .about-card {
-  @apply relative isolate overflow-hidden rounded-[2rem] border border-neutral-200/80 p-6 shadow-sm shadow-neutral-950/5 backdrop-blur sm:p-8;
+  @apply relative isolate overflow-hidden rounded-[2rem] border border-white/80 p-6 shadow-[0_24px_70px_-44px_rgba(15,23,42,0.45),0_1px_0_rgba(255,255,255,0.95)_inset] backdrop-blur sm:p-8;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 246, 240, 0.86)),
-    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.9), transparent 22rem);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(250, 249, 245, 0.9) 58%, rgba(244, 242, 235, 0.82)),
+    radial-gradient(circle at 14% 8%, rgba(255, 255, 255, 0.95), transparent 24rem);
 }
 
 .about-card::before {
-  @apply pointer-events-none absolute -inset-4 z-0 bg-cover bg-center opacity-70 content-[''];
+  @apply pointer-events-none absolute -inset-4 z-0 bg-cover bg-center opacity-55 content-[''];
   background-image: url("data:image/svg+xml,%3Csvg width='900' height='420' viewBox='0 0 900 420' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M-40 34C54 12 126 66 228 42C338 16 418 14 528 46C650 82 738 22 940 44' stroke='%23d4d4d4' stroke-opacity='.22' stroke-width='1.5' fill='none'/%3E%3Cpath d='M-40 78C72 46 128 116 238 82C336 52 414 38 514 78C628 124 708 54 940 84' stroke='%23d4d4d4' stroke-opacity='.28' stroke-width='1.5' fill='none'/%3E%3Cpath d='M-40 122C74 94 154 142 260 118C374 92 452 86 562 122C680 160 756 98 940 126' stroke='%23d4d4d4' stroke-opacity='.25' stroke-width='1.5' fill='none'/%3E%3Cpath d='M-40 166C72 132 164 190 266 158C382 122 452 128 562 166C674 204 760 128 940 162' stroke='%23d4d4d4' stroke-opacity='.24' stroke-width='1.5' fill='none'/%3E%3Cpath d='M-40 212C82 178 164 234 292 202C422 168 488 180 602 212C718 246 798 178 940 206' stroke='%23d4d4d4' stroke-opacity='.22' stroke-width='1.5' fill='none'/%3E%3Cpath d='M-40 258C86 224 158 284 292 250C422 216 484 228 598 260C710 292 796 224 940 252' stroke='%23d4d4d4' stroke-opacity='.2' stroke-width='1.5' fill='none'/%3E%3Cpath d='M-40 304C90 264 172 330 302 294C430 258 520 276 636 306C744 334 824 268 940 300' stroke='%23d4d4d4' stroke-opacity='.18' stroke-width='1.5' fill='none'/%3E%3Cpath d='M-40 354C78 316 184 374 310 344C442 312 530 324 652 354C766 382 828 322 940 350' stroke='%23d4d4d4' stroke-opacity='.16' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
 }
 
 .about-card::after {
-  @apply pointer-events-none absolute -right-20 -bottom-24 z-0 size-72 rounded-full bg-neutral-300/12 blur-3xl content-[''];
+  @apply pointer-events-none absolute -right-20 -bottom-24 z-0 size-80 rounded-full bg-neutral-300/16 blur-3xl content-[''];
 }
 
 .about-card > * {

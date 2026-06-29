@@ -33,26 +33,23 @@ export function ValuesSection({ content }: ValuesSectionProps) {
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
           {content.items.map((item, index) => {
             const Icon = icons[index] ?? Sparkles
 
             return (
-              <article
-                key={item.title}
-                className={`value-card ${index === 1 ? 'value-card-future' : ''}`}
-              >
-                <div className="value-card-content">
+              <article key={item.title} className="value-card">
+                <div className="value-card-heading">
                   <span className="value-icon">
-                    <Icon className="size-9" aria-hidden="true" />
+                    <Icon className="size-6" aria-hidden="true" />
                   </span>
-                  <h3 className="mt-6 text-2xl font-semibold text-neutral-950">
+                  <h3 className="text-2xl font-semibold text-neutral-950">
                     {item.title}
                   </h3>
-                  <p className="mt-4 text-lg leading-8 text-neutral-700">
-                    {item.description}
-                  </p>
                 </div>
+                <p className="mt-4 text-justify text-lg leading-8 text-neutral-700">
+                  {item.description}
+                </p>
               </article>
             )
           })}

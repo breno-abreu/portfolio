@@ -8,6 +8,7 @@ import {
 } from 'react-icons/fa'
 import { SiJavascript, SiSap } from 'react-icons/si'
 import type { IconType } from 'react-icons'
+import { assetUrl } from '../../lib/assetUrl'
 
 export type SkillIcon =
   | 'knowledge'
@@ -77,7 +78,7 @@ export function SkillsSection({ content }: SkillsSectionProps) {
               <article key={skill.title} className="skill-card">
                 <span className="skill-icon" data-skill-icon={skill.icon}>
                   {brandIcon ? (
-                    <img className="skill-brand-icon" src={brandIcon} alt="" aria-hidden="true" />
+                    <img className="skill-brand-icon" src={assetUrl(brandIcon)} alt="" aria-hidden="true" />
                   ) : (
                     Icon && <Icon aria-hidden="true" />
                   )}

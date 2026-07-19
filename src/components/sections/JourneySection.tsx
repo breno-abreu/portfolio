@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { Timeline } from 'primereact/timeline'
+import { assetUrl } from '../../lib/assetUrl'
 
 export type JourneyItem = {
   period: string
@@ -75,7 +76,7 @@ export function JourneySection({ content }: JourneySectionProps) {
       <div className="journey-card-header">
         {item.logoSrc ? (
           <span className="journey-logo-wrap">
-            <img src={item.logoSrc} alt={item.logoAlt ?? ''} className="journey-logo" />
+            <img src={assetUrl(item.logoSrc)} alt={item.logoAlt ?? ''} className="journey-logo" />
           </span>
         ) : null}
         <h3 className="text-xl font-semibold text-neutral-950">

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Check, Copy, FileText, MapPin } from 'lucide-react'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
+import { assetUrl } from '../../lib/assetUrl'
 
 const EMAIL = 'breno2601@gmail.com'
 
@@ -117,7 +118,7 @@ export function HomeSection({ content }: HomeSectionProps) {
           <div className="absolute -inset-5 rounded-[2rem] bg-neutral-500/20 blur-3xl transition duration-500 group-hover:bg-neutral-500/25 group-hover:blur-[2.5rem]" />
           <img
             className="relative aspect-[4/5] w-full rounded-[2rem] object-cover shadow-2xl shadow-neutral-950/25 ring-1 ring-neutral-950/10 transition duration-500 group-hover:scale-[1.015] group-hover:shadow-neutral-950/30"
-            src="/images/home-profile.jpg"
+            src={assetUrl('/images/home-profile.jpg')}
             alt={content.photoAlt}
           />
         </div>

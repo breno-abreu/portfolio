@@ -13,6 +13,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { Language } from '../App'
+import { assetUrl } from '../lib/assetUrl'
 
 type NavItem = {
   label: string
@@ -161,7 +162,7 @@ export function Navbar({
                 aria-pressed={language === option.code}
               >
                 <img
-                  src={`/flags/${option.code}.svg`}
+                  src={assetUrl(`/flags/${option.code}.svg`)}
                   className="language-flag"
                   width="28"
                   height="20"

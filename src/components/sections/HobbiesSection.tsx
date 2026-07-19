@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type TouchEvent } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { assetUrl } from '../../lib/assetUrl'
 
 export type HobbyImage = {
   src: string
@@ -115,14 +116,14 @@ function HobbyCard({
             >
               <img
                 className="hobby-carousel-image-blur"
-                src={image.src}
+                src={assetUrl(image.src)}
                 alt=""
                 aria-hidden="true"
                 draggable={false}
               />
               <img
                 className="hobby-carousel-image"
-                src={image.src}
+                src={assetUrl(image.src)}
                 alt={image.alt}
                 draggable={false}
               />

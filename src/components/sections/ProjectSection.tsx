@@ -1,5 +1,6 @@
 import { ExternalLink, Lock, Unlock } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
+import { assetUrl } from '../../lib/assetUrl'
 
 export type ProjectItem = {
   title: string
@@ -52,7 +53,7 @@ export function ProjectSection({ content }: ProjectSectionProps) {
               data-reversed={index % 2 === 1}
             >
               <div className="project-image-wrap">
-                <img className="project-image" src={project.image} alt={project.imageAlt} />
+                <img className="project-image" src={assetUrl(project.image)} alt={project.imageAlt} />
               </div>
 
               <div className="project-content">

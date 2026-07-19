@@ -11,6 +11,7 @@ export type ProjectItem = {
   githubUrl?: string
   demoUrl?: string
   demoLabel?: string
+  demoComingSoon?: boolean
   isPrivate?: boolean
 }
 
@@ -19,6 +20,7 @@ export type ProjectContent = {
   eyebrow: string
   githubLabel: string
   demoLabel: string
+  demoComingSoonLabel: string
   privateLabel: string
   openSourceLabel: string
   technologiesLabel: string
@@ -88,7 +90,7 @@ export function ProjectSection({ content }: ProjectSectionProps) {
                   </ul>
                 </div>
 
-                {project.githubUrl || project.demoUrl ? (
+                {project.githubUrl || project.demoUrl || project.demoComingSoon ? (
                   <div className="mt-6 flex flex-wrap gap-3">
                     {project.githubUrl ? (
                       <a
@@ -101,7 +103,12 @@ export function ProjectSection({ content }: ProjectSectionProps) {
                         {content.githubLabel}
                       </a>
                     ) : null}
-                    {project.demoUrl ? (
+                    {project.demoComingSoon ? (
+                      <span className="hero-button hero-button-secondary project-demo-soon">
+                        <ExternalLink className="size-5" aria-hidden="true" />
+                        {content.demoComingSoonLabel}
+                      </span>
+                    ) : project.demoUrl ? (
                       <a
                         className="hero-button hero-button-secondary"
                         href={project.demoUrl}

@@ -195,6 +195,10 @@ a:focus-visible {
   @apply border border-neutral-300 bg-white/80 text-neutral-800 backdrop-blur hover:border-green-800 hover:text-green-900;
 }
 
+.project-demo-soon {
+  @apply pointer-events-none cursor-default opacity-60 shadow-none hover:translate-y-0 hover:border-neutral-300 hover:text-neutral-800;
+}
+
 .email-copy-button {
   @apply inline-flex size-8 cursor-pointer items-center justify-center rounded-full border border-neutral-300 bg-white/80 text-neutral-600 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-green-800 hover:text-green-900;
 }

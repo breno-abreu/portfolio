@@ -76,7 +76,7 @@ const homeContent = {
     role: 'Desenvolvedor Fullstack',
     location: 'Curitiba, PR, Brasil',
     intro:
-      'Olá! Me chamo Breno e desenvolvo aplicações web completas, do frontend ao backend, focadas em simplicidade, performance e experiência do usuário.',
+      'Olá! Me chamo Breno e desenvolvo aplicações web completas, do frontend ao backend, focadas em simplicidade, usabilidade e experiência do usuário.',
     photoAlt: 'Imagem de perfil de Breno Abreu',
     githubLabel: 'GitHub',
     linkedinLabel: 'LinkedIn',
@@ -383,6 +383,7 @@ const projectContent = {
     eyebrow: 'Trabalhos em destaque',
     githubLabel: 'GitHub',
     demoLabel: 'Demo',
+    demoComingSoonLabel: 'Demo (em breve)',
     privateLabel: 'Código fechado',
     openSourceLabel: 'Código aberto',
     technologiesLabel: 'Tecnologias',
@@ -394,7 +395,7 @@ const projectContent = {
         image: '/images/projects/church-management.png',
         imageAlt: 'Captura de tela do sistema BLESS com painel de análise de engajamento',
         technologies: ['Vue.js', 'TypeScript', 'PrimeVue', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL', 'VPS', 'Docker'],
-        demoUrl: '#',
+        demoComingSoon: true,
         isPrivate: true,
       },
       {
@@ -405,7 +406,7 @@ const projectContent = {
         imageAlt: 'Captura de tela da PianoApp com visualização de notas e teclado virtual',
         technologies: ['Vue.js', 'JavaScript'],
         githubUrl: 'https://github.com/breno-abreu/piano-app',
-        demoUrl: '#',
+        demoUrl: 'https://breno-abreu.github.io/piano-app/',
       },
       {
         title: 'Portfólio Pessoal',
@@ -434,6 +435,7 @@ const projectContent = {
     eyebrow: 'Featured work',
     githubLabel: 'GitHub',
     demoLabel: 'Demo',
+    demoComingSoonLabel: 'Demo (coming soon)',
     privateLabel: 'Closed source',
     openSourceLabel: 'Open source',
     technologiesLabel: 'Technologies',
@@ -445,7 +447,7 @@ const projectContent = {
         image: '/images/projects/church-management.png',
         imageAlt: 'Screenshot of the BLESS system engagement analytics dashboard',
         technologies: ['Vue.js', 'TypeScript', 'PrimeVue', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL', 'VPS', 'Docker'],
-        demoUrl: '#',
+        demoComingSoon: true,
         isPrivate: true,
       },
       {
@@ -456,7 +458,7 @@ const projectContent = {
         imageAlt: 'Screenshot of PianoApp with note visualization and virtual keyboard',
         technologies: ['Vue.js', 'JavaScript'],
         githubUrl: 'https://github.com/breno-abreu/piano-app',
-        demoUrl: '#',
+        demoUrl: 'https://breno-abreu.github.io/piano-app/',
       },
       {
         title: 'Personal Portfolio',

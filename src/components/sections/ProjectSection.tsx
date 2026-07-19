@@ -1,4 +1,4 @@
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Lock, Unlock } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
 export type ProjectItem = {
@@ -7,9 +7,10 @@ export type ProjectItem = {
   image: string
   imageAlt: string
   technologies: string[]
-  githubUrl: string
+  githubUrl?: string
   demoUrl?: string
   demoLabel?: string
+  isPrivate?: boolean
 }
 
 export type ProjectContent = {
@@ -17,6 +18,8 @@ export type ProjectContent = {
   eyebrow: string
   githubLabel: string
   demoLabel: string
+  privateLabel: string
+  openSourceLabel: string
   technologiesLabel: string
   items: ProjectItem[]
 }
@@ -56,6 +59,17 @@ export function ProjectSection({ content }: ProjectSectionProps) {
                 <h3 className="text-2xl font-semibold text-neutral-950">
                   {project.title}
                 </h3>
+                {project.isPrivate ? (
+                  <span className="project-private-badge mt-3">
+                    <Lock className="size-3.5" aria-hidden="true" />
+                    {content.privateLabel}
+                  </span>
+                ) : (
+                  <span className="project-open-badge mt-3">
+                    <Unlock className="size-3.5" aria-hidden="true" />
+                    {content.openSourceLabel}
+                  </span>
+                )}
                 <p className="mt-4 leading-7 text-neutral-700">
                   {project.description}
                 </p>
@@ -73,28 +87,32 @@ export function ProjectSection({ content }: ProjectSectionProps) {
                   </ul>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    className="hero-button hero-button-primary"
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <FaGithub className="size-5" aria-hidden="true" />
-                    {content.githubLabel}
-                  </a>
-                  {project.demoUrl ? (
-                    <a
-                      className="hero-button hero-button-secondary"
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <ExternalLink className="size-5" aria-hidden="true" />
-                      {project.demoLabel ?? content.demoLabel}
-                    </a>
-                  ) : null}
-                </div>
+                {project.githubUrl || project.demoUrl ? (
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {project.githubUrl ? (
+                      <a
+                        className="hero-button hero-button-primary"
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FaGithub className="size-5" aria-hidden="true" />
+                        {content.githubLabel}
+                      </a>
+                    ) : null}
+                    {project.demoUrl ? (
+                      <a
+                        className="hero-button hero-button-secondary"
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <ExternalLink className="size-5" aria-hidden="true" />
+                        {project.demoLabel ?? content.demoLabel}
+                      </a>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
             </article>
           ))}

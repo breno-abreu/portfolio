@@ -140,6 +140,15 @@ export function Navbar({
             )}
           </button>
 
+          <a
+            className="navbar-contact-button"
+            href="#contact"
+            onClick={() => handleNavClick('contact')}
+          >
+            <Mail className="size-4" aria-hidden="true" />
+            <span>{text.contactLabel}</span>
+          </a>
+
           <div className="language-switcher" aria-label={text.languageLabel}>
             {languageOptions.map((option) => (
               <button

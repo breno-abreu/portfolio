@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Mail } from 'lucide-react'
 import { Navbar } from './components/Navbar'
 import { AboutSection } from './components/sections/AboutSection'
 import type { AboutContent } from './components/sections/AboutSection'
@@ -16,6 +17,7 @@ import { SkillsSection } from './components/sections/SkillsSection'
 import type { SkillsContent } from './components/sections/SkillsSection'
 import { ValuesSection } from './components/sections/ValuesSection'
 import type { ValuesContent } from './components/sections/ValuesSection'
+import { useSectionReveal } from './hooks/useSectionReveal'
 
 export type Language = 'pt' | 'en'
 
@@ -23,6 +25,8 @@ const LANGUAGE_STORAGE_KEY = 'portfolio:language'
 const EXPERIENCE_START_YEAR = 2023
 const RESUME_URL =
   'https://docs.google.com/document/d/13Ed_C5Bt7cCY0BGdrTreZBnwmcIvmyz4ujherzII7Wc/edit?usp=sharing'
+const RESUME_URL_EN =
+  'https://docs.google.com/document/d/1jmhZ3GceMJlZW0NDBNETqXK1ncuUpKbQKz-6npvT01E/edit?usp=sharing'
 const PAPER_URL =
   'https://drive.google.com/file/d/16jimJgUFG_yOOcCM7rDdCO5ru77rWtgX/view?usp=sharing'
 
@@ -32,12 +36,14 @@ const copy = {
     switchToEnglish: 'English',
     switchToPortuguese: 'Português',
     skipToContent: 'Pular para o conteúdo',
+    contactLabel: 'Contato',
   },
   en: {
     languageLabel: 'Language',
     switchToEnglish: 'English',
     switchToPortuguese: 'Português',
     skipToContent: 'Skip to content',
+    contactLabel: 'Contact',
   },
 } satisfies Record<Language, Record<string, string>>
 
@@ -48,8 +54,8 @@ const navItems = {
     { label: 'Trajetória', href: '#journey' },
     { label: 'Projetos', href: '#project' },
     { label: 'Habilidades', href: '#skills' },
-    { label: 'Hobbies', href: '#hobbies' },
     { label: 'Princípios', href: '#values' },
+    { label: 'Hobbies', href: '#hobbies' },
     { label: 'Contato', href: '#contact' },
   ],
   en: [
@@ -58,8 +64,8 @@ const navItems = {
     { label: 'Journey', href: '#journey' },
     { label: 'Projects', href: '#project' },
     { label: 'Skills', href: '#skills' },
-    { label: 'Hobbies', href: '#hobbies' },
     { label: 'Principles', href: '#values' },
+    { label: 'Hobbies', href: '#hobbies' },
     { label: 'Contact', href: '#contact' },
   ],
 } satisfies Record<Language, Array<{ label: string; href: string }>>
@@ -93,7 +99,7 @@ const homeContent = {
     copyEmailLabel: 'Copy email',
     copiedEmailLabel: 'Email copied',
     resumeLabel: 'Resume',
-    resumeUrl: RESUME_URL,
+    resumeUrl: RESUME_URL_EN,
   },
 } satisfies Record<Language, HomeContent>
 
@@ -377,27 +383,38 @@ const projectContent = {
     eyebrow: 'Trabalhos em destaque',
     githubLabel: 'GitHub',
     demoLabel: 'Demo',
+    privateLabel: 'Código fechado',
+    openSourceLabel: 'Código aberto',
     technologiesLabel: 'Tecnologias',
     items: [
+      {
+        title: 'Sistema de Gerenciamento para Igrejas',
+        description:
+          'Aplicação para gerenciamento de igrejas criada para substituir o uso disperso de planilhas e múltiplas ferramentas. A proposta é centralizar agendamentos compartilhados entre ministérios, cronogramas de eventos com acompanhamento em tempo real, repertórios e escalas de louvor e outros ministérios em uma solução customizada e profissional. A solução completa conta com autenticação e um sistema de permissões por RBAC, backend ASP.NET utilizando um banco de dados PostgreSQL e é executada em produção em uma VPS, containerizada com Docker.',
+        image: '/images/projects/church-management.png',
+        imageAlt: 'Captura de tela do sistema BLESS com painel de análise de engajamento',
+        technologies: ['Vue.js', 'TypeScript', 'PrimeVue', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL', 'VPS', 'Docker'],
+        demoUrl: '#',
+        isPrivate: true,
+      },
       {
         title: 'Plataforma de Ensino de Piano',
         description:
           'Plataforma pensada para melhorar o gerenciamento de aulas de piano, oferecendo um ambiente consolidado para alunos. A aplicação permite reproduzir arquivos MIDI e visualizar as notas tocadas em diferentes andamentos, consultar dicionários de acordes com teclado virtual e realizar exercícios de forma interativa.',
-        image: '/images/projects/piano-platform.jpg',
-        imageAlt: 'Imagem representando uma plataforma de ensino de piano',
+        image: '/images/projects/piano-platform.png',
+        imageAlt: 'Captura de tela da PianoApp com visualização de notas e teclado virtual',
         technologies: ['Vue.js', 'JavaScript'],
-        githubUrl: 'https://github.com/breno-abreu',
+        githubUrl: 'https://github.com/breno-abreu/piano-app',
         demoUrl: '#',
       },
       {
-        title: 'Sistema de Gerenciamento para Igrejas',
+        title: 'Portfólio Pessoal',
         description:
-          'Aplicação para gerenciamento de igrejas criada para substituir o uso disperso de planilhas e múltiplas ferramentas. A proposta é centralizar agendamentos compartilhados entre ministérios, cronogramas de eventos com acompanhamento em tempo real, repertórios e escalas de louvor e outros ministérios em uma solução customizada e profissional.',
-        image: '/images/projects/church-management.jpg',
-        imageAlt: 'Imagem representando gestão e organização para igrejas',
-        technologies: ['Vue.js', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL'],
-        githubUrl: 'https://github.com/breno-abreu',
-        demoUrl: '#',
+          'Esta própria aplicação de portfólio pessoal: uma frontend de página única criada para apresentar minha trajetória, projetos, habilidades e canais de contato em uma experiência bilíngue, moderna e organizada em seções componentizadas.',
+        image: '/images/projects/portfolio-site.svg',
+        imageAlt: 'Prévia estilizada da interface do portfólio pessoal',
+        technologies: ['React', 'TypeScript', 'Tailwind CSS'],
+        githubUrl: 'https://github.com/breno-abreu/portfolio',
       },
       {
         title: 'Artigo sobre Detecção de Fraudes em Licitações Utilizando IA',
@@ -410,15 +427,6 @@ const projectContent = {
         demoUrl: PAPER_URL,
         demoLabel: 'Artigo',
       },
-      {
-        title: 'Portfólio Pessoal',
-        description:
-          'Esta própria aplicação de portfólio pessoal: uma frontend de página única criada para apresentar minha trajetória, projetos, habilidades e canais de contato em uma experiência bilíngue, moderna e organizada em seções componentizadas.',
-        image: '/images/projects/portfolio-site.svg',
-        imageAlt: 'Prévia estilizada da interface do portfólio pessoal',
-        technologies: ['React', 'TypeScript', 'Tailwind CSS'],
-        githubUrl: 'https://github.com/breno-abreu/portfolio',
-      },
     ],
   },
   en: {
@@ -426,27 +434,38 @@ const projectContent = {
     eyebrow: 'Featured work',
     githubLabel: 'GitHub',
     demoLabel: 'Demo',
+    privateLabel: 'Closed source',
+    openSourceLabel: 'Open source',
     technologiesLabel: 'Technologies',
     items: [
+      {
+        title: 'Church Management System',
+        description:
+          'Church management application designed to replace scattered spreadsheets and multiple disconnected tools. The goal is to centralize shared scheduling across ministries, event timelines with real-time tracking, worship repertoires, and ministry rosters in a customized and professional solution. The full solution includes authentication and an RBAC permission system, an ASP.NET backend with a PostgreSQL database, and runs in production on a VPS, containerized with Docker.',
+        image: '/images/projects/church-management.png',
+        imageAlt: 'Screenshot of the BLESS system engagement analytics dashboard',
+        technologies: ['Vue.js', 'TypeScript', 'PrimeVue', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL', 'VPS', 'Docker'],
+        demoUrl: '#',
+        isPrivate: true,
+      },
       {
         title: 'Piano Learning Platform',
         description:
           'Platform designed to improve the management of piano lessons by offering a consolidated environment for students. The application allows MIDI file playback with note visualization at different tempos, chord dictionary exploration with a virtual keyboard, and interactive exercises.',
-        image: '/images/projects/piano-platform.jpg',
-        imageAlt: 'Image representing a piano learning platform',
+        image: '/images/projects/piano-platform.png',
+        imageAlt: 'Screenshot of PianoApp with note visualization and virtual keyboard',
         technologies: ['Vue.js', 'JavaScript'],
-        githubUrl: 'https://github.com/breno-abreu',
+        githubUrl: 'https://github.com/breno-abreu/piano-app',
         demoUrl: '#',
       },
       {
-        title: 'Church Management System',
+        title: 'Personal Portfolio',
         description:
-          'Church management application designed to replace scattered spreadsheets and multiple disconnected tools. The goal is to centralize shared scheduling across ministries, event timelines with real-time tracking, worship repertoires, and ministry rosters in a customized and professional solution.',
-        image: '/images/projects/church-management.jpg',
-        imageAlt: 'Image representing management and organization for churches',
-        technologies: ['Vue.js', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL'],
-        githubUrl: 'https://github.com/breno-abreu',
-        demoUrl: '#',
+          'This personal portfolio application itself: a single-page frontend created to present my journey, projects, skills, and contact channels through a bilingual, modern experience organized into componentized sections.',
+        image: '/images/projects/portfolio-site.svg',
+        imageAlt: 'Stylized preview of the personal portfolio interface',
+        technologies: ['React', 'TypeScript', 'Tailwind CSS'],
+        githubUrl: 'https://github.com/breno-abreu/portfolio',
       },
       {
         title: 'Paper on Fraud Detection in Public Procurement Using AI',
@@ -458,15 +477,6 @@ const projectContent = {
         githubUrl: 'https://github.com/breno-abreu/TCC_Abreu_Pereira',
         demoUrl: PAPER_URL,
         demoLabel: 'Paper',
-      },
-      {
-        title: 'Personal Portfolio',
-        description:
-          'This personal portfolio application itself: a single-page frontend created to present my journey, projects, skills, and contact channels through a bilingual, modern experience organized into componentized sections.',
-        image: '/images/projects/portfolio-site.svg',
-        imageAlt: 'Stylized preview of the personal portfolio interface',
-        technologies: ['React', 'TypeScript', 'Tailwind CSS'],
-        githubUrl: 'https://github.com/breno-abreu/portfolio',
       },
     ],
   },
@@ -620,28 +630,9 @@ const hobbiesContent = {
   pt: {
     title: 'Hobbies',
     eyebrow: 'Além do código',
-    openGalleryLabel: 'Abrir galeria',
-    closeGalleryLabel: 'Fechar galeria',
+    previousImageLabel: 'Foto anterior',
+    nextImageLabel: 'Próxima foto',
     items: [
-      {
-        title: 'Música e Piano',
-        description:
-          'A música faz parte da minha vida desde cedo. Comecei a estudar piano em 2004 e também arrisco um pouco de violão e guitarra. Tenho paixão em fazer música e tocar ao vivo. Na maior parte dos sábados do ano, toco em público na igreja e ajudo a coordenar e organizar apresentações musicais.',
-        images: [
-          {
-            src: '/images/hobbies/music/music-4.png',
-            alt: 'Foto tocando teclado em uma apresentação musical',
-          },
-          {
-            src: '/images/hobbies/music/music-5.png',
-            alt: 'Foto de partituras sobre um piano',
-          },
-          {
-            src: '/images/hobbies/music/music-6.png',
-            alt: 'Foto tocando teclado e cantando em uma apresentação',
-          },
-        ],
-      },
       {
         title: 'Fotografia',
         description:
@@ -658,6 +649,25 @@ const hobbiesContent = {
           {
             src: '/images/hobbies/photography/photo-3.png',
             alt: 'Foto macro de trevos com gotas de água',
+          },
+        ],
+      },
+      {
+        title: 'Música e Piano',
+        description:
+          'A música faz parte da minha vida desde cedo. Comecei a estudar piano em 2004 e também arrisco um pouco de violão e guitarra. Tenho paixão em fazer música e tocar ao vivo. Na maior parte dos sábados do ano, toco em público na igreja e ajudo a coordenar e organizar apresentações musicais.',
+        images: [
+          {
+            src: '/images/hobbies/music/music-4.png',
+            alt: 'Foto tocando teclado em uma apresentação musical',
+          },
+          {
+            src: '/images/hobbies/music/music-5.png',
+            alt: 'Foto de partituras sobre um piano',
+          },
+          {
+            src: '/images/hobbies/music/music-6.png',
+            alt: 'Foto tocando teclado e cantando em uma apresentação',
           },
         ],
       },
@@ -685,28 +695,9 @@ const hobbiesContent = {
   en: {
     title: 'Hobbies',
     eyebrow: 'Beyond code',
-    openGalleryLabel: 'Open gallery',
-    closeGalleryLabel: 'Close gallery',
+    previousImageLabel: 'Previous photo',
+    nextImageLabel: 'Next photo',
     items: [
-      {
-        title: 'Music and Piano',
-        description:
-          'Music has been part of my life from an early age. I started studying piano in 2004 and also play a bit of acoustic and electric guitar. I am passionate about making music and performing live. Most Saturdays of the year, I play publicly at church and help coordinate and organize musical presentations.',
-        images: [
-          {
-            src: '/images/hobbies/music/music-4.png',
-            alt: 'Photo playing keyboard in a musical performance',
-          },
-          {
-            src: '/images/hobbies/music/music-5.png',
-            alt: 'Photo of sheet music on a piano',
-          },
-          {
-            src: '/images/hobbies/music/music-6.png',
-            alt: 'Photo playing keyboard and singing in a performance',
-          },
-        ],
-      },
       {
         title: 'Photography',
         description:
@@ -723,6 +714,25 @@ const hobbiesContent = {
           {
             src: '/images/hobbies/photography/photo-3.png',
             alt: 'Macro photo of clovers with water droplets',
+          },
+        ],
+      },
+      {
+        title: 'Music and Piano',
+        description:
+          'Music has been part of my life from an early age. I started studying piano in 2004 and also play a bit of acoustic and electric guitar. I am passionate about making music and performing live. Most Saturdays of the year, I play publicly at church and help coordinate and organize musical presentations.',
+        images: [
+          {
+            src: '/images/hobbies/music/music-4.png',
+            alt: 'Photo playing keyboard in a musical performance',
+          },
+          {
+            src: '/images/hobbies/music/music-5.png',
+            alt: 'Photo of sheet music on a piano',
+          },
+          {
+            src: '/images/hobbies/music/music-6.png',
+            alt: 'Photo playing keyboard and singing in a performance',
           },
         ],
       },
@@ -809,7 +819,7 @@ const contactContent = {
     copyEmailLabel: 'Copy email',
     copiedEmailLabel: 'Email copied',
     resumeLabel: 'Resume',
-    resumeUrl: RESUME_URL,
+    resumeUrl: RESUME_URL_EN,
   },
 } satisfies Record<Language, ContactContent>
 
@@ -855,6 +865,8 @@ function App() {
   const text = copy[language]
   const aboutContent = getAboutContent(getExperienceYears())
 
+  useSectionReveal()
+
   useEffect(() => {
     document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
     localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
@@ -866,25 +878,52 @@ function App() {
       .map((sectionId) => document.getElementById(sectionId))
       .filter((section): section is HTMLElement => Boolean(section))
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSection = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0]
+    if (sections.length === 0) {
+      return
+    }
 
-        if (visibleSection) {
-          setActiveSection(visibleSection.target.id)
+    let frameId = 0
+
+    const updateActiveSection = () => {
+      frameId = 0
+
+      // Anchor just below the sticky navbar — the last section that crossed it wins.
+      const anchorY = Math.min(120, window.innerHeight * 0.22)
+      let currentSectionId = sections[0].id
+
+      for (const section of sections) {
+        const top = section.getBoundingClientRect().top
+
+        if (top <= anchorY) {
+          currentSectionId = section.id
         }
-      },
-      {
-        rootMargin: '-35% 0px -45% 0px',
-        threshold: [0.1, 0.25, 0.5, 0.75],
-      },
-    )
+      }
 
-    sections.forEach((section) => observer.observe(section))
+      setActiveSection((previous) =>
+        previous === currentSectionId ? previous : currentSectionId,
+      )
+    }
 
-    return () => observer.disconnect()
+    const handleScroll = () => {
+      if (frameId !== 0) {
+        return
+      }
+
+      frameId = window.requestAnimationFrame(updateActiveSection)
+    }
+
+    updateActiveSection()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
+
+    return () => {
+      if (frameId !== 0) {
+        window.cancelAnimationFrame(frameId)
+      }
+
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [language])
 
   return (
@@ -900,14 +939,24 @@ function App() {
         onLanguageChange={setLanguage}
         onNavItemClick={setActiveSection}
       />
+      {activeSection !== 'contact' ? (
+        <a
+          className="navbar-contact-button contact-floating-button"
+          href="#contact"
+          onClick={() => setActiveSection('contact')}
+        >
+          <Mail className="size-4" aria-hidden="true" />
+          <span>{text.contactLabel}</span>
+        </a>
+      ) : null}
       <main id="main-content" className="pb-16">
         <HomeSection content={homeContent[language]} />
         <AboutSection content={aboutContent[language]} />
         <JourneySection content={journeyContent[language]} />
         <ProjectSection content={projectContent[language]} />
         <SkillsSection content={skillsContent[language]} />
-        <HobbiesSection content={hobbiesContent[language]} />
         <ValuesSection content={valuesContent[language]} />
+        <HobbiesSection content={hobbiesContent[language]} />
         <ContactSection content={contactContent[language]} />
       </main>
       <footer className="site-footer">

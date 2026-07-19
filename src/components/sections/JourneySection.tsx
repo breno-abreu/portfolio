@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Timeline } from 'primereact/timeline'
 
 export type JourneyItem = {
@@ -21,11 +22,46 @@ type JourneySectionProps = {
   content: JourneyContent
 }
 
+const logoThemeColors: Record<string, string> = {
+  'utfpr.png': '#F9C710',
+  'apre.png': '#7CCF4A',
+  'solvay.png': '#508CFF',
+  'erbd.png': '#1FA855',
+  'sbbd.png': '#6B7C8F',
+  'grupo-negocios-publicos.png': '#E53935',
+}
+
+function getLogoThemeColor(logoSrc?: string) {
+  if (!logoSrc) {
+    return undefined
+  }
+
+  const fileName = logoSrc.split('/').pop()
+  return fileName ? logoThemeColors[fileName] : undefined
+}
+
+function themeStyle(logoSrc?: string): CSSProperties | undefined {
+  const themeColor = getLogoThemeColor(logoSrc)
+
+  return themeColor
+    ? ({ '--journey-theme': themeColor } as CSSProperties)
+    : undefined
+}
+
 export function JourneySection({ content }: JourneySectionProps) {
-  const markerTemplate = () => <span className="journey-marker" aria-hidden="true" />
+  const markerTemplate = (item: JourneyItem) => (
+    <span
+      className="journey-marker"
+      style={themeStyle(item.logoSrc)}
+      aria-hidden="true"
+    />
+  )
 
   const dateTemplate = (item: JourneyItem, isMobile = false) => (
-    <span className={isMobile ? 'journey-date-group journey-date-mobile' : 'journey-date-group'}>
+    <span
+      className={isMobile ? 'journey-date-group journey-date-mobile' : 'journey-date-group'}
+      style={themeStyle(item.logoSrc)}
+    >
       <span className="journey-date">{item.period}</span>
       {item.duration ? <span className="journey-duration">{item.duration}</span> : null}
     </span>
@@ -34,7 +70,7 @@ export function JourneySection({ content }: JourneySectionProps) {
   const oppositeTemplate = (item: JourneyItem) => dateTemplate(item)
 
   const contentTemplate = (item: JourneyItem) => (
-    <article className="journey-card">
+    <article className="journey-card" style={themeStyle(item.logoSrc)}>
       {dateTemplate(item, true)}
       <div className="journey-card-header">
         {item.logoSrc ? (

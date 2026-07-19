@@ -149,11 +149,7 @@ function HobbyCard({
             >
               <ChevronRight className="size-5" aria-hidden="true" />
             </button>
-          </>
-        ) : null}
 
-        <div className="hobby-card-overlay">
-          {imageCount > 1 ? (
             <div className="hobby-carousel-dots" role="tablist" aria-label={hobby.title}>
               {hobby.images.map((image, index) => (
                 <button
@@ -168,13 +164,13 @@ function HobbyCard({
                 />
               ))}
             </div>
-          ) : null}
+          </>
+        ) : null}
+      </div>
 
-          <div className="hobby-card-body">
-            <h3>{hobby.title}</h3>
-            <p>{hobby.description}</p>
-          </div>
-        </div>
+      <div className="hobby-card-body">
+        <h3>{hobby.title}</h3>
+        <p>{hobby.description}</p>
       </div>
     </article>
   )

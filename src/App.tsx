@@ -395,7 +395,7 @@ const projectContent = {
         image: '/images/projects/church-management.png',
         imageAlt: 'Captura de tela do sistema BLESS com painel de análise de engajamento',
         technologies: ['Vue.js', 'TypeScript', 'PrimeVue', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL', 'VPS', 'Docker'],
-        demoComingSoon: true,
+        demoUrl: 'https://breno-abreu.github.io/batel-ms-demo/',
         isPrivate: true,
       },
       {
@@ -447,7 +447,7 @@ const projectContent = {
         image: '/images/projects/church-management.png',
         imageAlt: 'Screenshot of the BLESS system engagement analytics dashboard',
         technologies: ['Vue.js', 'TypeScript', 'PrimeVue', 'C#', 'ASP.NET', 'SQL', 'PostgreSQL', 'VPS', 'Docker'],
-        demoComingSoon: true,
+        demoUrl: 'https://breno-abreu.github.io/batel-ms-demo/',
         isPrivate: true,
       },
       {

@@ -150,7 +150,7 @@ function getAboutContent(experienceYears: number): Record<Language, AboutContent
       title: 'Sobre',
       eyebrow: 'Quem sou',
       paragraphs: [
-        `Sou formado em Bacharelado em Sistemas de Informação pela UTFPR. Tenho mais de ${yearsPt} de experiência profissional em desenvolvimento Web Full Stack, Automação Robótica de Processos (RPA), e Engenharia de Dados utilizando as linguagens C# com ASP.NET, Javascript com Vue.js, SQL e VBA e a plataforma Celonis EMS; além de ter utilizado a linguagem Python em projetos de Ciência de Dados.`,
+        `Sou formado em Bacharelado em Sistemas de Informação pela UTFPR. Tenho mais de ${yearsPt} de experiência profissional em desenvolvimento Web Fullstack, Automação Robótica de Processos (RPA), e Engenharia de Dados utilizando as linguagens C# com ASP.NET, Javascript com Vue.js, SQL e VBA e a plataforma Celonis EMS; além de ter utilizado a linguagem Python em projetos de Ciência de Dados.`,
         {
           before:
             'Em 2024 ganhei o prêmio de melhor artigo na categoria Pesquisa na ERBD 2024 com o trabalho “',
@@ -171,7 +171,7 @@ function getAboutContent(experienceYears: number): Record<Language, AboutContent
       title: 'About',
       eyebrow: 'Who I am',
       paragraphs: [
-        `I hold a Bachelor's degree in Information Systems from UTFPR. I have over ${yearsEn} of professional experience in Full Stack Web development, Robotic Process Automation (RPA), and Data Engineering using C# with ASP.NET, JavaScript with Vue.js, SQL, VBA, and the Celonis EMS platform; I have also used Python in Data Science projects.`,
+        `I hold a Bachelor's degree in Information Systems from UTFPR. I have over ${yearsEn} of professional experience in Fullstack Web development, Robotic Process Automation (RPA), and Data Engineering using C# with ASP.NET, JavaScript with Vue.js, SQL, VBA, and the Celonis EMS platform; I have also used Python in Data Science projects.`,
         {
           before:
             'In 2024, I won the best paper award in the Research category at ERBD 2024 with the work “',
@@ -492,11 +492,11 @@ const skillsContent = {
       {
         title: 'Base Técnica Multidisciplinar',
         description:
-          'Conhecimento em Sistemas de Informação, Programação Web Full Stack com Microsserviços e APIs REST, Automação Robótica de Processos (RPA), Ciência e Engenharia de Dados.',
+          'Conhecimento em Sistemas de Informação, Programação Web Fullstack com Microsserviços e APIs REST, Automação Robótica de Processos (RPA), Ciência e Engenharia de Dados.',
         icon: 'knowledge',
         keywords: [
           'Sistemas de Informação',
-          'Full Stack',
+          'Fullstack',
           'REST APIs',
           'RPA',
           'Engenharia de Dados',
@@ -566,9 +566,9 @@ const skillsContent = {
       {
         title: 'Multidisciplinary Technical Foundation',
         description:
-          'Knowledge in Information Systems, Full Stack Web Programming with Microservices and REST APIs, Robotic Process Automation (RPA), Data Science, and Data Engineering.',
+          'Knowledge in Information Systems, Fullstack Web Programming with Microservices and REST APIs, Robotic Process Automation (RPA), Data Science, and Data Engineering.',
         icon: 'knowledge',
-        keywords: ['Information Systems', 'Full Stack', 'REST APIs', 'RPA', 'Data Engineering', 'Data Science'],
+        keywords: ['Information Systems', 'Fullstack', 'REST APIs', 'RPA', 'Data Engineering', 'Data Science'],
       },
       {
         title: 'Programming Languages',

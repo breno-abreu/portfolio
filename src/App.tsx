@@ -638,7 +638,7 @@ const hobbiesContent = {
       {
         title: 'Fotografia',
         description:
-          'Sempre tive vontade de aprender a fotografar e finalmente comprei minha primeira câmera profissional em 2023. Gosto de lidar com aspectos como composição e edição, tentando sempre deixar as fotos com a melhor qualidade possível. Gosto especialmente de fotografias de paisagens e retratos, e também contribuo voluntariamente com fotografias de eventos locais quando tenho oportunidade.',
+          'Sempre tive vontade de aprender a fotografar e finalmente comprei minha primeira câmera profissional há alguns anos atrás. Gosto de lidar com aspectos como composição e edição, tentando sempre deixar as fotos com a melhor qualidade possível. Gosto especialmente de fotografias de paisagens e retratos, e também contribuo voluntariamente com fotografias de eventos locais quando tenho oportunidade.',
         images: [
           {
             src: '/images/hobbies/photography/photo-1.png',
@@ -657,7 +657,7 @@ const hobbiesContent = {
       {
         title: 'Música e Piano',
         description:
-          'A música faz parte da minha vida desde cedo. Comecei a estudar piano em 2004 e também arrisco um pouco de violão e guitarra. Tenho paixão em fazer música e tocar ao vivo. Na maior parte dos sábados do ano, toco em público na igreja e ajudo a coordenar e organizar apresentações musicais.',
+          'A música faz parte da minha vida desde cedo. Estudo piano desde criança e também arrisco um pouco de violão e guitarra. Tenho paixão em fazer música e tocar ao vivo. Toco semanalmente em público e ajudo a coordenar e organizar apresentações musicais.',
         images: [
           {
             src: '/images/hobbies/music/music-4.png',

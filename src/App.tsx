@@ -703,7 +703,7 @@ const hobbiesContent = {
       {
         title: 'Photography',
         description:
-          'I had always wanted to learn photography and finally bought my first professional camera in 2023. I enjoy working with composition and editing, always trying to make photos reach the best quality possible. I especially enjoy landscape and portrait photography, and I also volunteer as a photographer for local events whenever I have the opportunity.',
+          'I had always wanted to learn photography and finally bought my first professional camera a few years ago. I enjoy working with composition and editing, always trying to make photos reach the best quality possible. I especially enjoy landscape and portrait photography, and I also volunteer as a photographer for local events whenever I have the opportunity.',
         images: [
           {
             src: '/images/hobbies/photography/photo-1.png',
@@ -722,7 +722,7 @@ const hobbiesContent = {
       {
         title: 'Music and Piano',
         description:
-          'Music has been part of my life from an early age. I started studying piano in 2004 and also play a bit of acoustic and electric guitar. I am passionate about making music and performing live. Most Saturdays of the year, I play publicly at church and help coordinate and organize musical presentations.',
+          'Music has been part of my life from an early age. I have been studying piano since childhood and also play a bit of acoustic and electric guitar. I am passionate about making music and performing live. I play publicly every week and help coordinate and organize musical presentations.',
         images: [
           {
             src: '/images/hobbies/music/music-4.png',
